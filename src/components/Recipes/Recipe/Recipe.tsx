@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { RecipeModel } from "../../../models/recipe";
 import Ingredients from "../../Ingredients/Ingredients";
@@ -8,7 +7,6 @@ import { RecipesContext } from "../../store/recipes-context";
 
 const Recipe: React.FC<{ recipe: RecipeModel }> = ({ recipe }) => {
 	const ctx = useContext(RecipesContext);
-	const navigate = useNavigate();
 
 	const onBtnClickHandler = (): void => {
 		const ingredients = recipe.ingredients;
