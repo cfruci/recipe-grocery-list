@@ -1,14 +1,12 @@
-type Recipe = {
+export type RecipeModel = {
 	id: string;
 	cuisine: string;
-	ingredients: Ingredient[];
+	ingredients: IngredientModel[];
 };
 
-type Ingredient = {
+export type IngredientModel = {
 	id: string;
 	type: string;
 	quantity: number;
 	unit: string;
 };
-
-export default Recipe;

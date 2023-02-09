@@ -1,0 +1,22 @@
+.recipe {
+	padding: 1rem;
+	color: black;
+	background-color: white;
+	border-radius: 10px;
+	transition: all 0.2s;
+}
+
+.recipe:hover {
+	transform: scale(1.05);
+}
+
+button {
+	margin: 0.2rem;
+	padding: 0.3rem;
+	border-radius: 5px;
+	border: solid 0.5px;
+}
+
+button:hover {
+	background-color: orange;
+}

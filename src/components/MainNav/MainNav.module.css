@@ -1,7 +1,23 @@
-.nav-items {
-	text-decoration: none;
+.header {
+	display: flex;
+	justify-content: center;
+	max-width: 60rem;
+	margin: auto;
+	padding: 2rem;
 }
 
-.nav-item {
-	color: green;
+.list {
+	display: flex;
+	gap: 1rem;
+}
+
+.list a {
+	text-decoration: none;
+	color: white;
+}
+
+.list a.active,
+.list a:hover {
+	text-decoration: underline;
+	color: orange;
 }
