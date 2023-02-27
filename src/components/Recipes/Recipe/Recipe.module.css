@@ -1,5 +1,6 @@
 .recipe {
-	padding: 1rem;
+	padding: 1.5rem;
+	min-width: 15rem;
 	color: black;
 	background-color: white;
 	border-radius: 10px;
@@ -8,6 +9,7 @@
 
 .recipe:hover {
 	transform: scale(1.05);
+	cursor: pointer;
 }
 
 button {
@@ -19,4 +21,5 @@ button {
 
 button:hover {
 	background-color: orange;
+	cursor: pointer;
 }

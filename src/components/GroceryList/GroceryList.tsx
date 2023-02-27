@@ -1,20 +1,30 @@
 import { useContext } from "react";
 
 import styles from "./GroceryList.module.css";
-import { RecipesContext } from "../store/recipes-context";
+import { GroceriesContext } from "../store/groceries-context";
+
+import GroceryItem from "./GroceryItem";
 
 const GroceryList: React.FC = () => {
-	const ctx = useContext(RecipesContext);
+	const groceriesCtx = useContext(GroceriesContext);
 
-	return (
+	const deleteIngredientHandler = (event: any): void => {
+		groceriesCtx.deleteIngredient(event.target);
+	};
+
+	const groceryItems = (
 		<ul className={styles.groceries}>
-			{ctx.groceryList.map((groceryItem) => (
-				<li
+			{groceriesCtx.groceryList.map((groceryItem) => (
+				<GroceryItem
 					key={groceryItem.id}
-				>{`${groceryItem.id}: ${groceryItem.quantity}`}</li>
+					groceryItem={groceryItem}
+					onDelete={deleteIngredientHandler}
+				/>
 			))}
 		</ul>
 	);
+
+	return { groceryItems };
 };
 
 export default GroceryList;

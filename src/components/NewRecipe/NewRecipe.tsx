@@ -5,14 +5,15 @@ import { RecipesContext } from "../store/recipes-context";
 import styles from "./NewRecipe.module.css";
 
 const NewRecipe: React.FC = () => {
-	const ctx = useContext(RecipesContext);
+	const recipesCtx = useContext(RecipesContext);
 
 	const onSubmitHandler = () => {
-		ctx.addNewRecipe();
+		recipesCtx.addRecipe();
 	};
 
 	return (
 		<Form action="" onSubmit={onSubmitHandler} className={styles.form}>
+			<h2>Add New Recipe</h2>
 			<div className={styles.control}>
 				<label htmlFor="name">Recipe Name:</label>
 				<input type="text" id="name" />

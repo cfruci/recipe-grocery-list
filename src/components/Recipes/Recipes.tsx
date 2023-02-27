@@ -5,24 +5,24 @@ import Recipe from "./Recipe/Recipe";
 import { RecipesContext } from "../store/recipes-context";
 
 const Recipes: React.FC = () => {
-	const ctx = useContext(RecipesContext);
+	const recipesCtx = useContext(RecipesContext);
 	const [cuisine, setCuisine] = useState("All");
 
 	const onCuisineChangeHandler = (event: any): void => {
 		setCuisine(event.target.value);
 	};
 
-	let recipes = ctx.recipes.map((recipe) => (
+	let recipes = recipesCtx.recipes.map((recipe) => (
 		<Recipe key={recipe.id} recipe={recipe} />
 	));
 
 	if (cuisine !== "All") {
-		recipes = ctx.recipes
+		recipes = recipesCtx.recipes
 			.filter((recipe) => recipe.cuisine === cuisine)
 			.map((recipe) => <Recipe key={recipe.id} recipe={recipe} />);
 	}
 
-	const cuisines = ctx.recipes.map((recipe) => recipe.cuisine);
+	const cuisines = recipesCtx.recipes.map((recipe) => recipe.cuisine);
 
 	return (
 		<>

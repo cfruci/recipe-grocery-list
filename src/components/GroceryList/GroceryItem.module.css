@@ -1,0 +1,14 @@
+.groceryItem:hover {
+	scale: 1.01;
+	background-color: white;
+	color: black;
+}
+
+.deleteBtn {
+	padding: 0.05rem;
+}
+
+.deleteBtn:hover {
+	background-color: black;
+	color: white;
+}
