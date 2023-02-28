@@ -1,4 +1,13 @@
-.groceryItem:hover {
+.grocery {
+	cursor: pointer;
+	padding: 0.5rem;
+	margin: 0.5rem;
+	transition: all 0.1s;
+	display: flex;
+	justify-content: space-between;
+}
+
+.grocery:hover {
 	scale: 1.01;
 	background-color: white;
 	color: black;

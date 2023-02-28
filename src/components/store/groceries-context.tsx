@@ -4,14 +4,14 @@ import Props from "../../models/props";
 
 const initialGroceries: IngredientModel[] = [];
 
-type groceryListObj = {
-	groceryList: IngredientModel[];
+type groceriesObj = {
+	groceries: IngredientModel[];
 	addIngredients: (ingredients: IngredientModel[]) => void;
 	deleteIngredient: (ingredient: IngredientModel) => void;
 };
 
-export const GroceriesContext = createContext<groceryListObj>({
-	groceryList: [],
+export const GroceriesContext = createContext<groceriesObj>({
+	groceries: [],
 	addIngredients: () => {},
 	deleteIngredient: () => {},
 });
@@ -20,15 +20,15 @@ export const GroceriesContextProvider: React.FC<Props> = (props) => {
 	const [groceries, setGroceries] = useState(initialGroceries);
 
 	const deleteIngredientHandler = (ingredient: IngredientModel) => {
-		console.log("ingredient deleted");
+		// const currentIngredient = ingredient.id;
 	};
 
 	const addIngredientsHandler = (ingredients: IngredientModel[]) => {
-		setGroceries((prevGroceries) => prevGroceries.concat(ingredients));
+		ingredients.map((ingredient) => console.log(ingredient));
 	};
 
-	const groceryCtx = {
-		groceryList: groceries,
+	const groceryCtx: groceriesObj = {
+		groceries,
 		addIngredients: addIngredientsHandler,
 		deleteIngredient: deleteIngredientHandler,
 	};
