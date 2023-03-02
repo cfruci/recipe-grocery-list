@@ -23,3 +23,7 @@ button:hover {
 	background-color: orange;
 	cursor: pointer;
 }
+
+.added {
+	color: orange;
+}

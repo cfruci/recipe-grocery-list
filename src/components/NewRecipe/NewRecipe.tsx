@@ -11,6 +11,7 @@ const NewRecipe: React.FC = () => {
 	const addNewIngredient = () => {
 		console.log("ingredient added");
 	};
+
 	const onSubmitHandler = () => {
 		recipesCtx.addRecipe();
 	};
@@ -19,14 +20,14 @@ const NewRecipe: React.FC = () => {
 		<Form action="" onSubmit={onSubmitHandler} className={styles.form}>
 			<h2>Add New Recipe</h2>
 			<div className={styles.control}>
-				<label htmlFor="name">Recipe Name:</label>
-				<input type="text" id="name" />
+				<label htmlFor="recipe-name">Recipe Name:</label>
+				<input type="text" id="recipe-name" placeholder="name" />
 			</div>
 			<div className={styles.control}>
-				<label htmlFor="newIngredient">Ingredient:</label>
-				<input type="text" id="newIngredient" placeholder="name" />
-				<input type="text" id="newIngredient" placeholder="quantity" />
-				<input type="text" id="newIngredient" placeholder="unit" />
+				<label htmlFor="new-ingredient">Ingredient:</label>
+				<input type="text" id="new-ingredient" placeholder="ingredient" />
+				<input type="text" id="new-ingredient" placeholder="quantity" />
+				<input type="text" id="new-ingredient" placeholder="unit" />
 				<button onClick={addNewIngredient} className={styles.addIngredientBtn}>
 					+ Ingredient
 				</button>
