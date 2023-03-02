@@ -12,6 +12,7 @@ import NewRecipePage from "./pages/NewRecipePage";
 import { RecipesContextProvider } from "./components/store/recipes-context";
 import RecipePage from "./pages/RecipePage";
 import { GroceriesContextProvider } from "./components/store/groceries-context";
+import { AuthContextProvider } from "./components/store/auth-context";
 
 const router = createBrowserRouter([
 	{
@@ -33,11 +34,13 @@ const router = createBrowserRouter([
 
 const App: React.FC = () => {
 	return (
-		<GroceriesContextProvider>
-			<RecipesContextProvider>
-				<RouterProvider router={router} />
-			</RecipesContextProvider>
-		</GroceriesContextProvider>
+		<AuthContextProvider>
+			<GroceriesContextProvider>
+				<RecipesContextProvider>
+					<RouterProvider router={router} />
+				</RecipesContextProvider>
+			</GroceriesContextProvider>
+		</AuthContextProvider>
 	);
 };
 

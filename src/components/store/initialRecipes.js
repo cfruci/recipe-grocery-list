@@ -6,7 +6,7 @@ export const initialRecipes = [
 		ingredients: [
 			{
 				id: "Jalapeno",
-				type: "Vegetable",
+				type: "Produce",
 				quantity: 1,
 				unit: "",
 			},
@@ -25,13 +25,13 @@ export const initialRecipes = [
 		ingredients: [
 			{
 				id: "Gold Potatoes",
-				type: "Vegetable",
+				type: "Produce",
 				quantity: 4,
 				unit: "",
 			},
 			{
 				id: "Lemon",
-				type: "Fruit",
+				type: "Produce",
 				quantity: 2,
 				unit: "",
 			},
@@ -44,7 +44,7 @@ export const initialRecipes = [
 		ingredients: [
 			{
 				id: "Penne",
-				type: "Box",
+				type: "Pantry",
 				quantity: 1,
 				unit: "",
 			},

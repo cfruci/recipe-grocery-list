@@ -20,11 +20,56 @@ export const GroceriesContextProvider: React.FC<Props> = (props) => {
 	const [groceries, setGroceries] = useState(initialGroceries);
 
 	const deleteIngredientHandler = (ingredient: IngredientModel) => {
-		// const currentIngredient = ingredient.id;
+		const existingIngredientIndex = groceries.findIndex(
+			(grocery) => grocery.id === ingredient.id
+		);
+		if (groceries[existingIngredientIndex].quantity > 1) {
+			const existingIngredientQuantity =
+				groceries[existingIngredientIndex].quantity;
+			const updatedIngredient = {
+				...groceries[existingIngredientIndex],
+				quantity: existingIngredientQuantity - 1,
+			};
+			setGroceries((prevGroceries) => {
+				const newGroceries = [...prevGroceries];
+				newGroceries[existingIngredientIndex] = updatedIngredient;
+				return newGroceries;
+			});
+		} else {
+			setGroceries((prevGroceries) =>
+				prevGroceries.filter((grocery) => grocery.id !== ingredient.id)
+			);
+		}
 	};
 
 	const addIngredientsHandler = (ingredients: IngredientModel[]) => {
-		ingredients.map((ingredient) => console.log(ingredient));
+		const groceriesHash: {
+			[key: string]: boolean;
+		} = {};
+
+		groceries.forEach((grocery) => {
+			if (!groceriesHash[grocery.id]) {
+				groceriesHash[grocery.id] = true;
+			}
+		});
+
+		ingredients.forEach((ingredient) => {
+			if (!groceriesHash[ingredient.id]) {
+				groceriesHash[ingredient.id] = true;
+				setGroceries((prevGroceries) => prevGroceries.concat(ingredient));
+			} else {
+				const existingIndex = groceries.findIndex(
+					(grocery) => grocery.id === ingredient.id
+				);
+				const updatedQuantity = groceries[existingIndex].quantity + 1;
+
+				setGroceries((prevGroceries) => {
+					const newGroceries: IngredientModel[] = [...prevGroceries];
+					newGroceries[existingIndex].quantity = updatedQuantity;
+					return newGroceries;
+				});
+			}
+		});
 	};
 
 	const groceryCtx: groceriesObj = {
@@ -32,6 +77,7 @@ export const GroceriesContextProvider: React.FC<Props> = (props) => {
 		addIngredients: addIngredientsHandler,
 		deleteIngredient: deleteIngredientHandler,
 	};
+
 	return (
 		<GroceriesContext.Provider value={groceryCtx}>
 			{props.children}
