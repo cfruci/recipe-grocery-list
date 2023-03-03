@@ -1,24 +1,24 @@
-section {
+.ingredients {
 	margin: auto;
 	min-width: 40rem;
 }
 
-table {
+.ingredientTable {
 	text-align: center;
 	border: 1px solid orange;
 	margin: auto;
 	padding: 1rem;
 }
 
-button {
+.ingredientBtns {
 	margin: 0.5rem;
 }
 
-.ingredient {
+.ingredientRow {
 	text-align: left;
 }
 
-.actions {
+.ingredientActions {
 	display: flex;
 }
 

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { Form } from "react-router-dom";
 import { RecipesContext } from "../store/recipes-context";
@@ -25,8 +25,18 @@ const NewRecipe: React.FC = () => {
 			</div>
 			<div className={styles.control}>
 				<label htmlFor="new-ingredient">Ingredient:</label>
-				<input type="text" id="new-ingredient" placeholder="ingredient" />
-				<input type="text" id="new-ingredient" placeholder="quantity" />
+				<input
+					type="text"
+					id="new-ingredient"
+					placeholder="ingredient"
+					required
+				/>
+				<input
+					type="text"
+					id="new-ingredient"
+					placeholder="quantity"
+					required
+				/>
 				<input type="text" id="new-ingredient" placeholder="unit" />
 				<button onClick={addNewIngredient} className={styles.addIngredientBtn}>
 					+ Ingredient

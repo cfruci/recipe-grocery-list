@@ -5,8 +5,8 @@ const ErrorPage: React.FC = () => {
 		<>
 			<MainNav />
 			<main>
-				<h1>Something went wrong!</h1>
-				<p>Please check your URL</p>
+				<h2>Something went wrong!</h2>
+				<p>Check your URL</p>
 			</main>
 		</>
 	);

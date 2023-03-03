@@ -7,8 +7,8 @@ import GroceryItem from "./GroceryItem";
 const GroceryList: React.FC = () => {
 	const groceriesCtx = useContext(GroceriesContext);
 
-	const onClickHandler = () => {
-		console.log("list texted");
+	const onClearHandler = () => {
+		groceriesCtx.clearList();
 	};
 
 	const meats = groceriesCtx.groceries
@@ -29,6 +29,7 @@ const GroceryList: React.FC = () => {
 
 	return (
 		<>
+			<h2>Current List</h2>
 			<ul className={styles.groceries}>
 				{meats.length > 0 ? (
 					<>
@@ -68,7 +69,7 @@ const GroceryList: React.FC = () => {
 					""
 				)}
 			</ul>
-			<button onClick={onClickHandler}>Text Me My List</button>
+			<button onClick={onClearHandler}>Clear List</button>
 		</>
 	);
 };

@@ -8,12 +8,14 @@ type groceriesObj = {
 	groceries: IngredientModel[];
 	addIngredients: (ingredients: IngredientModel[]) => void;
 	deleteIngredient: (ingredient: IngredientModel) => void;
+	clearList: () => void;
 };
 
 export const GroceriesContext = createContext<groceriesObj>({
 	groceries: [],
 	addIngredients: () => {},
 	deleteIngredient: () => {},
+	clearList: () => {},
 });
 
 export const GroceriesContextProvider: React.FC<Props> = (props) => {
@@ -72,10 +74,15 @@ export const GroceriesContextProvider: React.FC<Props> = (props) => {
 		});
 	};
 
+	const clearListHandler = () => {
+		setGroceries((prevGroceries) => []);
+	};
+
 	const groceryCtx: groceriesObj = {
 		groceries,
 		addIngredients: addIngredientsHandler,
 		deleteIngredient: deleteIngredientHandler,
+		clearList: clearListHandler,
 	};
 
 	return (

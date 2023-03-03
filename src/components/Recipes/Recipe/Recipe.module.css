@@ -12,18 +12,16 @@
 	cursor: pointer;
 }
 
-button {
+.addBtn,
+.removeBtn {
 	margin: 0.2rem;
 	padding: 0.3rem;
 	border-radius: 5px;
 	border: solid 0.5px;
 }
 
-button:hover {
+.addBtn:hover,
+.removeBtn:hover {
 	background-color: orange;
 	cursor: pointer;
-}
-
-.added {
-	color: orange;
 }

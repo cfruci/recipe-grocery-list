@@ -85,21 +85,21 @@ const Ingredients: React.FC = () => {
 		setIngredientUnit("");
 	};
 
-	const updateIngredient = ({
-		id,
-		newIngredientQuantity,
-		newIngredientUnit,
-	}: newIngredient) => {
-		currentRecipe.ingredients.map((ingredient) => {
-			if (ingredient.id === id) {
-				ingredient.quantity = newIngredientQuantity;
-				ingredient.unit = newIngredientUnit;
-			}
-		});
-		setInEditMode({ isEditing: false, rowKey: null });
-		setIngredientQuantity(0);
-		setIngredientUnit("");
-	};
+	// const updateIngredient = ({
+	// 	id,
+	// 	newIngredientQuantity,
+	// 	newIngredientUnit,
+	// }: newIngredient) => {
+	// 	currentRecipe.ingredients.map((ingredient) => {
+	// 		if (ingredient.id === id) {
+	// 			ingredient.quantity = newIngredientQuantity;
+	// 			ingredient.unit = newIngredientUnit;
+	// 		}
+	// 	});
+	// 	setInEditMode({ isEditing: false, rowKey: null });
+	// 	setIngredientQuantity(0);
+	// 	setIngredientUnit("");
+	// };
 
 	const addIngredientHandler = () => {
 		setInEditMode({ isEditing: true, rowKey: null });
@@ -107,11 +107,11 @@ const Ingredients: React.FC = () => {
 	};
 
 	return (
-		<section>
-			<table className={styles.table}>
+		<section className={styles.ingredients}>
+			<table className={styles.ingredientTable}>
 				<thead className={styles.thead}>
 					<tr>
-						<th className={styles.ingredient}>Ingredient</th>
+						<th className={styles.ingredientRow}>Ingredient</th>
 						<th>Quantity</th>
 						<th>Unit</th>
 						<th>Actions</th>
@@ -146,8 +146,9 @@ const Ingredients: React.FC = () => {
 								<td>{ingredient.unit}</td>
 							)}
 							{inEditMode.isEditing && inEditMode.rowKey === ingredient.id ? (
-								<td className={styles.actions}>
+								<td className={styles.ingredientActions}>
 									<button
+										className={styles.ingredientBtns}
 										onClick={() =>
 											onSave({
 												id: ingredient.id,
@@ -158,11 +159,14 @@ const Ingredients: React.FC = () => {
 									>
 										Save
 									</button>
-									<button onClick={onCancel}>Cancel</button>
+									<button onClick={onCancel} className={styles.ingredientBtns}>
+										Cancel
+									</button>
 								</td>
 							) : (
 								<td className={styles.actions}>
 									<button
+										className={styles.ingredientBtns}
 										onClick={() =>
 											onEdit({
 												id: ingredient.id,
@@ -173,7 +177,10 @@ const Ingredients: React.FC = () => {
 									>
 										Edit
 									</button>
-									<button onClick={() => onDelete(ingredient.id)}>
+									<button
+										className={styles.ingredientBtns}
+										onClick={() => onDelete(ingredient.id)}
+									>
 										Delete
 									</button>
 								</td>
@@ -207,6 +214,7 @@ const Ingredients: React.FC = () => {
 							</td>
 							<td>
 								<button
+									className={styles.ingredientBtns}
 									onClick={() =>
 										onSave({
 											id: currentIngredientName,
@@ -217,13 +225,16 @@ const Ingredients: React.FC = () => {
 								>
 									Save
 								</button>
-								<button onClick={onCancel}>Cancel</button>
+								<button className={styles.ingredientBtns} onClick={onCancel}>
+									Cancel
+								</button>
 							</td>
 						</tr>
 					)}
 					<tr>
 						<td>
 							<button
+								className={styles.ingredientBtns}
 								onClick={addIngredientHandler}
 								disabled={inEditMode.isEditing}
 							>

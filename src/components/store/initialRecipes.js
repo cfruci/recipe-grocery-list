@@ -3,6 +3,7 @@ export const initialRecipes = [
 		id: "Turkey Bake",
 		cuisine: "Mexican",
 		description: "A delicious meal, 30-min",
+		addedToGroceryList: false,
 		ingredients: [
 			{
 				id: "Jalapeno",
@@ -22,6 +23,7 @@ export const initialRecipes = [
 		id: "Greek Chicken",
 		cuisine: "Mediterranean",
 		description: "A nice recipe, needs a salad",
+		addedToGroceryList: false,
 		ingredients: [
 			{
 				id: "Gold Potatoes",
@@ -41,6 +43,7 @@ export const initialRecipes = [
 		id: "Pasta",
 		cuisine: "Italian",
 		description: "Penne ala vodka",
+		addedToGroceryList: false,
 		ingredients: [
 			{
 				id: "Penne",

@@ -1,4 +1,3 @@
-import { link } from "fs";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../store/auth-context";
@@ -9,10 +8,10 @@ const MainNav: React.FC = () => {
 	const authCtx = useContext(AuthContext);
 
 	return (
-		<header className={styles.header}>
-			<h1>Shop by Recipe</h1>
+		<header className={styles.mainHeader}>
+			<h1 className={styles.mainHeading}>Shop by Recipe</h1>
 			<p>Build a grocery list based on your favorite recipes!</p>
-			<nav>
+			<nav className={styles.mainNav}>
 				<ul className={styles.list}>
 					{!authCtx.loggedIn ? (
 						<button onClick={authCtx.logIn}>Log In</button>

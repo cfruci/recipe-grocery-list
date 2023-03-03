@@ -1,4 +1,4 @@
-header {
+.mainHeader {
 	display: flex;
 	flex-direction: column;
 	max-width: 60rem;
@@ -7,16 +7,16 @@ header {
 	text-align: center;
 }
 
-h1 {
+.mainHeading {
 	margin: 1rem;
 }
 
-header p {
+.mainHeader p {
 	font-style: italic;
 	margin: 0rem;
 }
 
-nav {
+.mainNav {
 	margin: 1rem 0rem 0rem;
 	display: flex;
 	justify-content: center;
