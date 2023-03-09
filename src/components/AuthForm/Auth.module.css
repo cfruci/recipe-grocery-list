@@ -1,12 +1,9 @@
-.authForm {
-	background-color: salmon;
-}
-
-h3 {
+.header {
 	font-weight: bold;
 }
 
-form {
+.authForm {
+	background-color: salmon;
 	display: flex;
 	flex-direction: column;
 	max-width: 25rem;
@@ -17,6 +14,14 @@ form {
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.control {
+.controls {
 	display: flex;
+	gap: 10px;
+	padding: 0.5rem;
+}
+
+.inputs {
+	border: 1px black solid;
+	padding: 1rem;
+	margin: 1rem;
 }

@@ -1,6 +1,7 @@
 .ingredients {
-	margin: auto;
-	min-width: 40rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .ingredientTable {
@@ -8,13 +9,14 @@
 	border: 1px solid orange;
 	margin: auto;
 	padding: 1rem;
+	min-width: 30rem;
 }
 
 .ingredientBtns {
 	margin: 0.5rem;
 }
 
-.ingredientRow {
+.leftColumn {
 	text-align: left;
 }
 
@@ -22,7 +24,12 @@
 	display: flex;
 }
 
-input {
-	text-align: center;
-	width: 5rem;
+.newIngredient {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.newIngredient input {
+	max-width: 7rem;
 }

@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styles from "./Ingredients.module.css";
 import { RecipesContext } from "../store/recipes-context";
 import { useParams } from "react-router-dom";
-
-// typescript types
+import { IngredientModel } from "../../models/recipe";
+import ReadOnlyRow from "./ReadOnlyRow";
+import EditOnlyRow from "./EditOnlyRow";
 
 type currentIngredient = {
 	id: string;
@@ -17,14 +18,22 @@ type newIngredient = {
 	newIngredientUnit: string;
 };
 
-// FC begins
 const Ingredients: React.FC = () => {
-	const ctx = useContext(RecipesContext);
+	const recipesCtx = useContext(RecipesContext);
 	const params = useParams();
 
-	const currentRecipe = ctx.recipes.filter(
+	const currentRecipe = recipesCtx.recipes.filter(
 		(recipe) => recipe.id === params.recipeId
 	)[0];
+
+	const [currentIngredientQuantity, setIngredientQuantity] =
+		useState<number>(0);
+	const [currentIngredientUnit, setIngredientUnit] = useState<string>("");
+	const [currentIngredientName, setIngredientName] = useState<string>("");
+
+	const newIngredientName = useRef<HTMLInputElement>(null);
+	const newIngredientQuantity = useRef<HTMLInputElement>(null);
+	const newIngredientUnit = useRef<HTMLInputElement>(null);
 
 	// sets Editing mode
 	const [inEditMode, setInEditMode] = useState<{
@@ -34,13 +43,6 @@ const Ingredients: React.FC = () => {
 		isEditing: false,
 		rowKey: null,
 	});
-
-	// state for what is currently being edited
-	const [currentIngredientQuantity, setIngredientQuantity] =
-		useState<number>(0);
-	const [currentIngredientUnit, setIngredientUnit] = useState<string>("");
-	const [addNewRow, setAddNewRow] = useState<boolean>(false);
-	const [currentIngredientName, setIngredientName] = useState<string>("");
 
 	// handlers
 
@@ -101,9 +103,16 @@ const Ingredients: React.FC = () => {
 	// 	setIngredientUnit("");
 	// };
 
-	const addIngredientHandler = () => {
-		setInEditMode({ isEditing: true, rowKey: null });
-		setAddNewRow(true);
+	const addIngredientHandler = (event: React.FormEvent): void => {
+		event.preventDefault();
+
+		const newIngredient: IngredientModel = {
+			id: newIngredientName.current!.value,
+			type: newIngredientName.current!.value,
+			quantity: parseInt(newIngredientQuantity.current!.value),
+			unit: newIngredientUnit.current!.value,
+		};
+		recipesCtx.addIngredientToRecipe(newIngredient, currentRecipe.id);
 	};
 
 	return (
@@ -111,7 +120,7 @@ const Ingredients: React.FC = () => {
 			<table className={styles.ingredientTable}>
 				<thead className={styles.thead}>
 					<tr>
-						<th className={styles.ingredientRow}>Ingredient</th>
+						<th className={styles.leftColumn}>Ingredient</th>
 						<th>Quantity</th>
 						<th>Unit</th>
 						<th>Actions</th>
@@ -119,8 +128,12 @@ const Ingredients: React.FC = () => {
 				</thead>
 				<tbody>
 					{currentRecipe.ingredients.map((ingredient) => (
+						// <EditOnlyRow ingredient={ingredient}/>
+						// <ReadOnlyRow ingredient={ingredient}/>
 						<tr key={ingredient.id}>
-							<td className={styles.ingredient}>{ingredient.id}</td>
+							<td className={`${styles.ingredient} ${styles.leftColumn}`}>
+								{ingredient.id}
+							</td>
 							{inEditMode.isEditing && inEditMode.rowKey === ingredient.id ? (
 								<td>
 									<input
@@ -187,19 +200,19 @@ const Ingredients: React.FC = () => {
 							)}
 						</tr>
 					))}
-					{inEditMode.isEditing && addNewRow && (
+					{inEditMode.isEditing && (
 						<tr>
 							<td>
 								<input
 									type="text"
-									placeholder="Ingredient Name"
+									placeholder="Ingredient"
 									onChange={(event) => setIngredientName(event.target.value)}
 								/>
 							</td>
 							<td>
 								<input
 									type="number"
-									placeholder="0"
+									placeholder="1"
 									onChange={(event) =>
 										setIngredientQuantity(event.target.valueAsNumber)
 									}
@@ -231,19 +244,25 @@ const Ingredients: React.FC = () => {
 							</td>
 						</tr>
 					)}
-					<tr>
-						<td>
-							<button
-								className={styles.ingredientBtns}
-								onClick={addIngredientHandler}
-								disabled={inEditMode.isEditing}
-							>
-								Add Ingredient
-							</button>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			<h3>Add New Ingredient</h3>
+			<form
+				onSubmit={(event: React.FormEvent) => addIngredientHandler(event)}
+				className={styles.newIngredient}
+			>
+				<input type="text" placeholder="Ingredient" ref={newIngredientName} />
+				<input
+					type="number"
+					placeholder="Quantity"
+					defaultValue={0}
+					min={0}
+					ref={newIngredientQuantity}
+				/>
+				<input type="text" placeholder="Unit" ref={newIngredientUnit} />
+
+				<button className={styles.ingredientBtns}>Add Ingredient</button>
+			</form>
 		</section>
 	);
 };

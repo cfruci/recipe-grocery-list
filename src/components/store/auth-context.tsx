@@ -14,7 +14,7 @@ export const AuthContext = createContext<authContextObj>({
 });
 
 export const AuthContextProvider: React.FC<Props> = ({ children }) => {
-	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
 	const logInHandler = () => {
 		setIsLoggedIn(true);

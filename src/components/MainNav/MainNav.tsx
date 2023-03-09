@@ -13,9 +13,7 @@ const MainNav: React.FC = () => {
 			<p>Build a grocery list based on your favorite recipes!</p>
 			<nav className={styles.mainNav}>
 				<ul className={styles.list}>
-					{!authCtx.loggedIn ? (
-						<button onClick={authCtx.logIn}>Log In</button>
-					) : (
+					{!authCtx.loggedIn ? null : (
 						<>
 							<li>
 								<NavLink

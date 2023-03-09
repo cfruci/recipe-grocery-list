@@ -21,10 +21,8 @@ const RecipePage: React.FC = () => {
 		<>
 			<button onClick={onClickHandler}>Back to All Recipes</button>
 			<hr />
-			<section style={{ maxWidth: "20rem", margin: "auto" }}>
-				<h2>{id}</h2>
-				<Ingredients />
-			</section>
+			<h2>{id}</h2>
+			<Ingredients />
 		</>
 	);
 };
