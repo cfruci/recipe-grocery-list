@@ -1,0 +1,8 @@
+.leftColumn {
+	text-align: left;
+}
+
+.ingredientBtns:hover {
+	background-color: orange;
+	cursor: pointer;
+}

@@ -16,8 +16,9 @@
 	margin: 0.5rem;
 }
 
-.leftColumn {
-	text-align: left;
+.ingredientBtns:hover {
+	background-color: orange;
+	cursor: pointer;
 }
 
 .ingredientActions {
