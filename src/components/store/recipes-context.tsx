@@ -17,7 +17,7 @@ type RecipesContextObj = {
 		ingredientId: string,
 		currentRecipeId: string
 	) => void;
-	updateIngredient: () => void;
+	updateIngredient: (ingredientId: string) => void;
 	cancelUpdate: () => void;
 	inEditMode: boolean;
 	addRecipeToGroceryList: (ingredients: IngredientModel[]) => void;
@@ -75,7 +75,6 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
 		ingredientId: string,
 		currentRecipeId: string
 	) => {
-		console.log(ingredientId);
 		const [recipeToUpdate] = recipes.filter(
 			(recipe) => recipe.id === currentRecipeId
 		);
@@ -96,7 +95,7 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
 		});
 	};
 
-	const updateIngredientHandler = () => {
+	const updateIngredientHandler = (ingredientId: string) => {
 		setInEditMode(true);
 	};
 

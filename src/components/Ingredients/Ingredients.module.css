@@ -34,3 +34,7 @@
 .newIngredient input {
 	max-width: 7rem;
 }
+
+.leftColumn {
+	text-align: left;
+}
