@@ -46,18 +46,26 @@ const Ingredients: React.FC = () => {
 		setEditFormData(editFormData);
 	};
 
-	const onEditChangeHandler = (
+	const onEditQuantityChangeHandler = (
 		ingredient: IngredientModel,
-		event: React.FormEvent<HTMLInputElement>
+		event: React.ChangeEvent<HTMLInputElement>
 	) => {
 		const editingIngredient = {
-			id: ingredient.id,
-			type: ingredient.type,
-			// quantity: event.currentTarget.value,
-			// unit:
+			...ingredient,
+			quantity: parseInt(event.currentTarget.value!),
 		};
+		setEditFormData(editingIngredient);
+	};
 
-		// setEditFormData(editIngredient);
+	const onEditUnitChangeHandler = (
+		ingredient: IngredientModel,
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
+		const editingIngredient = {
+			...ingredient,
+			unit: event.currentTarget.value!,
+		};
+		setEditFormData(editingIngredient);
 	};
 
 	const deleteClickHandler = (ingredient: string) => {
@@ -68,14 +76,16 @@ const Ingredients: React.FC = () => {
 		setEditIngredientId(null);
 	};
 
-	const saveClickHandler = () => {
+	const saveClickHandler = (event: React.FormEvent) => {
 		const updatedIngredient = {
 			id: editFormData.id,
 			type: editFormData.type,
 			quantity: editFormData.quantity,
 			unit: editFormData.unit,
 		};
-		recipesCtx.updateIngredient(updatedIngredient);
+		event.preventDefault();
+		recipesCtx.updateIngredient(updatedIngredient, currentRecipe);
+		setEditIngredientId(null);
 	};
 
 	const addIngredientHandler = (event: React.FormEvent): void => {
@@ -113,7 +123,8 @@ const Ingredients: React.FC = () => {
 									cancelClickHandler={cancelClickHandler}
 									saveClickHandler={saveClickHandler}
 									editFormData={editFormData}
-									onEditChangeHandler={onEditChangeHandler}
+									onEditQuantityChangeHandler={onEditQuantityChangeHandler}
+									onEditUnitChangeHandler={onEditUnitChangeHandler}
 								/>
 							) : (
 								<ReadOnlyRow

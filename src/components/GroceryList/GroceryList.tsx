@@ -69,7 +69,9 @@ const GroceryList: React.FC = () => {
 					""
 				)}
 			</ul>
-			<button onClick={onClearHandler}>Clear List</button>
+			{groceriesCtx.groceries.length > 0 ? (
+				<button onClick={onClearHandler}>Clear List</button>
+			) : null}
 		</>
 	);
 };

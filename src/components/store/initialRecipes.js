@@ -9,7 +9,7 @@ export const initialRecipes = [
 				id: "Jalapeno",
 				type: "Produce",
 				quantity: 1,
-				unit: "n/a",
+				unit: "",
 			},
 			{
 				id: "Ground Turkey",

@@ -5,18 +5,23 @@ import { IngredientModel } from "../../models/recipe";
 const EditOnlyRow: React.FC<{
 	ingredient: IngredientModel;
 	cancelClickHandler: () => void;
-	saveClickHandler: () => void;
+	saveClickHandler: (event: React.FormEvent) => void;
 	editFormData: IngredientModel;
-	onEditChangeHandler: (
+	onEditQuantityChangeHandler: (
 		ingredient: IngredientModel,
-		event: React.FormEvent<HTMLInputElement>
+		event: React.ChangeEvent<HTMLInputElement>
+	) => void;
+	onEditUnitChangeHandler: (
+		ingredient: IngredientModel,
+		event: React.ChangeEvent<HTMLInputElement>
 	) => void;
 }> = ({
 	ingredient,
 	cancelClickHandler,
 	saveClickHandler,
 	editFormData,
-	onEditChangeHandler,
+	onEditQuantityChangeHandler,
+	onEditUnitChangeHandler,
 }) => {
 	return (
 		<tr key={ingredient.id}>
@@ -25,9 +30,10 @@ const EditOnlyRow: React.FC<{
 				<input
 					type="number"
 					name="quantity"
+					min={0}
 					value={editFormData.quantity}
-					onChange={(event: React.FormEvent<HTMLInputElement>) =>
-						onEditChangeHandler(ingredient, event)
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+						onEditQuantityChangeHandler(ingredient, event)
 					}
 				/>
 			</td>
@@ -36,13 +42,15 @@ const EditOnlyRow: React.FC<{
 					type="text"
 					name="unit"
 					value={editFormData.unit}
-					onChange={(event) => onEditChangeHandler(ingredient, event)}
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+						onEditUnitChangeHandler(ingredient, event)
+					}
 				/>
 			</td>
 			<td className={styles.ingredientActions}>
 				<button
 					className={styles.ingredientBtns}
-					onClick={() => saveClickHandler()}
+					onClick={(event: React.FormEvent) => saveClickHandler(event)}
 				>
 					Save
 				</button>
