@@ -7,7 +7,10 @@ const EditOnlyRow: React.FC<{
 	cancelClickHandler: () => void;
 	saveClickHandler: () => void;
 	editFormData: IngredientModel;
-	onEditChangeHandler: (ingredient: IngredientModel) => void;
+	onEditChangeHandler: (
+		ingredient: IngredientModel,
+		event: React.FormEvent<HTMLInputElement>
+	) => void;
 }> = ({
 	ingredient,
 	cancelClickHandler,
@@ -21,15 +24,19 @@ const EditOnlyRow: React.FC<{
 			<td>
 				<input
 					type="number"
+					name="quantity"
 					value={editFormData.quantity}
-					onChange={() => onEditChangeHandler(ingredient)}
+					onChange={(event: React.FormEvent<HTMLInputElement>) =>
+						onEditChangeHandler(ingredient, event)
+					}
 				/>
 			</td>
 			<td>
 				<input
 					type="text"
+					name="unit"
 					value={editFormData.unit}
-					onChange={() => onEditChangeHandler(ingredient)}
+					onChange={(event) => onEditChangeHandler(ingredient, event)}
 				/>
 			</td>
 			<td className={styles.ingredientActions}>

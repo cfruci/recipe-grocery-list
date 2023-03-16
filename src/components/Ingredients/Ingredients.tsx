@@ -33,16 +33,28 @@ const Ingredients: React.FC = () => {
 		(recipe) => recipe.id === params.recipeId
 	);
 
-	const editClickHandler = (ingredientId: string) => {
-		setEditIngredientId(ingredientId);
-	};
+	const editClickHandler = (ingredient: IngredientModel) => {
+		setEditIngredientId(ingredient.id);
 
-	const onEditChangeHandler = (ingredient: IngredientModel) => {
-		const editIngredient = {
+		const editFormData = {
 			id: ingredient.id,
 			type: ingredient.type,
-			// quantity: event.target.value,
-			// unit: event.target.value,
+			quantity: ingredient.quantity,
+			unit: ingredient.unit,
+		};
+
+		setEditFormData(editFormData);
+	};
+
+	const onEditChangeHandler = (
+		ingredient: IngredientModel,
+		event: React.FormEvent<HTMLInputElement>
+	) => {
+		const editingIngredient = {
+			id: ingredient.id,
+			type: ingredient.type,
+			// quantity: event.currentTarget.value,
+			// unit:
 		};
 
 		// setEditFormData(editIngredient);
@@ -56,7 +68,15 @@ const Ingredients: React.FC = () => {
 		setEditIngredientId(null);
 	};
 
-	const saveClickHandler = () => {};
+	const saveClickHandler = () => {
+		const updatedIngredient = {
+			id: editFormData.id,
+			type: editFormData.type,
+			quantity: editFormData.quantity,
+			unit: editFormData.unit,
+		};
+		recipesCtx.updateIngredient(updatedIngredient);
+	};
 
 	const addIngredientHandler = (event: React.FormEvent): void => {
 		event.preventDefault();

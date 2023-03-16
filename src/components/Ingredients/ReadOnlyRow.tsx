@@ -5,7 +5,7 @@ import { IngredientModel } from "../../models/recipe";
 const ReadOnlyRow: React.FC<{
 	ingredient: IngredientModel;
 	recipeId: string;
-	editClickHandler: (ingredientId: string) => void;
+	editClickHandler: (ingredient: IngredientModel) => void;
 	deleteClickHandler: (ingredientId: string) => void;
 }> = ({ ingredient, recipeId, editClickHandler, deleteClickHandler }) => {
 	return (
@@ -18,7 +18,7 @@ const ReadOnlyRow: React.FC<{
 			<td className={styles.actions}>
 				<button
 					className={styles.ingredientBtns}
-					onClick={() => editClickHandler(ingredient.id)}
+					onClick={() => editClickHandler(ingredient)}
 				>
 					Edit
 				</button>
