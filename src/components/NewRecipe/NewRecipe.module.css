@@ -27,3 +27,7 @@ input[id="new-ingredient"] {
 	margin: 0px;
 	padding: 0.25rem;
 }
+
+button:hover {
+	background-color: orange;
+}

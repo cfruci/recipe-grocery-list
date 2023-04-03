@@ -7,7 +7,7 @@ import { initialRecipes } from "./initialRecipes";
 
 type RecipesContextObj = {
 	recipes: RecipeModel[];
-	addRecipe: () => void;
+	addRecipe: (newRecipe: RecipeModel) => void;
 	deleteRecipe: (recipeId: string) => void;
 	addIngredientToRecipe: (
 		ingredient: IngredientModel,
@@ -44,8 +44,10 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
 
 	const groceriesCtx = useContext(GroceriesContext);
 
-	const addNewRecipeHandler = () => {
-		setRecipes((prevRecipes) => prevRecipes.concat([]));
+	const addNewRecipeHandler = (newRecipe: RecipeModel) => {
+		console.log(newRecipe);
+		setRecipes((prevRecipes) => prevRecipes.concat(newRecipe));
+		console.log(recipes);
 	};
 
 	const addIngredientHandler = (
