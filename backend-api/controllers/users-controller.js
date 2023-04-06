@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 exports.showAllUsers = (req, res) => {
   res
     .status(404)

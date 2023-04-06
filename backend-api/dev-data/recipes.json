@@ -2,7 +2,6 @@
   {
     "id": 0,
     "cuisine": "Mexican",
-    "description": "A delicious meal, 30-min",
     "addedToGroceryList": false,
     "ingredients": [
       { "id": "Jalapeno", "type": "Produce", "quantity": 1, "unit": "" },
