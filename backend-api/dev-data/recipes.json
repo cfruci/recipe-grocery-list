@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "name": "Turkey Bake",
     "cuisine": "Mexican",
     "addedToGroceryList": false,
     "ingredients": [
@@ -9,7 +9,7 @@
     ]
   },
   {
-    "id": 1,
+    "name": "Chicken Bake",
     "cuisine": "Mediterranean",
     "description": "A nice recipe, needs a salad",
     "addedToGroceryList": false,
@@ -19,7 +19,7 @@
     ]
   },
   {
-    "id": 2,
+    "name": "Penne ala vodka",
     "cuisine": "Italian",
     "description": "Penne ala vodka",
     "addedToGroceryList": false,
@@ -34,7 +34,7 @@
     ]
   },
   {
-    "id": 3,
+    "name": "Dim sum",
     "cuisine": "Chinese",
     "description": "Very nice",
     "addedToGroceryList": false,

@@ -1,86 +1,86 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState } from 'react';
 
-import { IngredientModel, RecipeModel } from "../../models/recipe";
-import { RecipesContext } from "../store/recipes-context";
-import styles from "./NewRecipe.module.css";
+import { IngredientModel, RecipeModel } from '../../models/recipe';
+import { RecipesContext } from '../store/recipes-context';
+import styles from './NewRecipe.module.css';
 
 const NewRecipe: React.FC = () => {
-	const recipesCtx = useContext(RecipesContext);
-	const [ingredients, setIngredients] = useState<IngredientModel[]>([]);
+  const recipesCtx = useContext(RecipesContext);
+  const [ingredients, setIngredients] = useState<IngredientModel[]>([]);
 
-	const recipeNameRef = useRef<HTMLInputElement>(null);
-	const recipeCuisineRef = useRef<HTMLInputElement>(null);
-	const recipeDescriptionRef = useRef<HTMLInputElement>(null);
-	const ingredientInputRef = useRef<HTMLInputElement>(null);
-	const ingredientTypeRef = useRef<HTMLSelectElement>(null);
-	const ingredientQuantityRef = useRef<HTMLInputElement>(null);
-	const ingredientUnitRef = useRef<HTMLInputElement>(null);
+  const recipeNameRef = useRef<HTMLInputElement>(null);
+  const recipeCuisineRef = useRef<HTMLInputElement>(null);
+  const recipeDescriptionRef = useRef<HTMLInputElement>(null);
+  const ingredientInputRef = useRef<HTMLInputElement>(null);
+  const ingredientTypeRef = useRef<HTMLSelectElement>(null);
+  const ingredientQuantityRef = useRef<HTMLInputElement>(null);
+  const ingredientUnitRef = useRef<HTMLInputElement>(null);
 
-	const addNewIngredient = (event: React.FormEvent) => {
-		event.preventDefault();
-		const newIngredient: IngredientModel = {
-			id: ingredientInputRef.current!.value,
-			type: ingredientTypeRef.current!.value,
-			quantity: parseInt(ingredientQuantityRef.current!.value),
-			unit: ingredientUnitRef.current!.value,
-		};
+  const addNewIngredient = (event: React.FormEvent) => {
+    event.preventDefault();
+    const newIngredient: IngredientModel = {
+      id: ingredientInputRef.current!.value,
+      type: ingredientTypeRef.current!.value,
+      quantity: parseInt(ingredientQuantityRef.current!.value),
+      unit: ingredientUnitRef.current!.value,
+    };
 
-		setIngredients((prevIngredient) => prevIngredient.concat(newIngredient));
-	};
+    setIngredients((prevIngredient) => prevIngredient.concat(newIngredient));
+  };
 
-	const onSubmitHandler = (event: React.FormEvent) => {
-		event.preventDefault();
-		const newRecipe: RecipeModel = {
-			id: recipeNameRef.current!.value,
-			description: recipeDescriptionRef.current!.value,
-			cuisine: recipeCuisineRef.current!.value,
-			ingredients,
-		};
-		recipesCtx.addRecipe(newRecipe);
-	};
+  const onSubmitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
+    const newRecipe: RecipeModel = {
+      id: recipeNameRef.current!.value,
+      description: recipeDescriptionRef.current!.value,
+      cuisine: recipeCuisineRef.current!.value,
+      ingredients,
+    };
+    recipesCtx.addRecipe(newRecipe);
+  };
 
-	return (
-		<>
-			<form
-				action=""
-				onSubmit={(event: React.FormEvent) => onSubmitHandler(event)}
-				className={styles.form}
-			>
-				<h2>Add New Recipe</h2>
-				<div className={styles.descriptors}>
-					<div className={styles.control}>
-						<label htmlFor="recipe-name">Recipe Name:</label>
-						<input
-							type="text"
-							id="recipe-name"
-							placeholder="Insert name..."
-							ref={recipeNameRef}
-							required
-						/>
-					</div>
-					<div className={styles.control}>
-						<label htmlFor="recipe-cuisine">Cuisine:</label>
-						<input
-							type="text"
-							id="recipe-cuisine"
-							ref={recipeCuisineRef}
-							placeholder="Describe cuisine..."
-							required
-						/>
-					</div>
-					<div className={styles.control}>
-						<label htmlFor="recipe-description">Description:</label>
-						<input
-							type="text"
-							ref={recipeDescriptionRef}
-							id="recipe-description"
-							placeholder="Describe recipe..."
-							required
-						/>
-					</div>
-				</div>
-			</form>
-			<form action="">
+  return (
+    <>
+      <form
+        action=""
+        onSubmit={(event: React.FormEvent) => onSubmitHandler(event)}
+        className={styles.form}
+      >
+        <h2>Add New Recipe</h2>
+        <div className={styles.descriptors}>
+          <div className={styles.control}>
+            <label htmlFor="recipe-name">Recipe Name:</label>
+            <input
+              type="text"
+              id="recipe-name"
+              placeholder="Insert name..."
+              ref={recipeNameRef}
+              required
+            />
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="recipe-cuisine">Cuisine:</label>
+            <input
+              type="text"
+              id="recipe-cuisine"
+              ref={recipeCuisineRef}
+              placeholder="Describe cuisine..."
+              required
+            />
+          </div>
+          <div className={styles.control}>
+            <label htmlFor="recipe-description">Description:</label>
+            <input
+              type="text"
+              ref={recipeDescriptionRef}
+              id="recipe-description"
+              placeholder="Describe recipe..."
+              required
+            />
+          </div>
+        </div>
+      </form>
+      {/* <form action="">
 				<div className="ingredients">
 					<h3>Ingredients</h3>
 					{ingredients.length > 0
@@ -135,9 +135,9 @@ const NewRecipe: React.FC = () => {
 					</div>
 				</div>
 			</form>
-			<button disabled={false}>Save Recipe</button>
-		</>
-	);
+			<button disabled={false}>Save Recipe</button> */}
+    </>
+  );
 };
 
 export default NewRecipe;
