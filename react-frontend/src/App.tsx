@@ -1,15 +1,16 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 import './App.css';
+
+// page imports
 import RootLayout from './pages/RootLayout';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import GroceryListPage from './pages/GroceryListPage';
-import NewRecipePage from './pages/NewRecipePage';
-
-import { RecipesContextProvider } from './components/store/recipes-context';
 import RecipePage from './pages/RecipePage';
+
+// context imports
+import { RecipesContextProvider } from './components/store/recipes-context';
 import { GroceriesContextProvider } from './components/store/groceries-context';
 import { AuthContextProvider } from './components/store/auth-context';
 
@@ -22,11 +23,11 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: '/recipes/:recipeId', element: <RecipePage /> },
       { path: '/grocery-list', element: <GroceryListPage /> },
-      { path: '/add-new-recipe', element: <NewRecipePage /> },
     ],
   },
 ]);
 
+// COMPONENET BEGINS
 const App: React.FC = () => {
   return (
     <AuthContextProvider>
