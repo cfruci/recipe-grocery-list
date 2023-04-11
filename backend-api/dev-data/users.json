@@ -1,7 +1,7 @@
 [
   {
-    "id": 123,
-    "name": "Chris Fruci",
+    "username": "cfruci",
+    "email": "cfruci@gmail.com",
     "recipes": [
       {
         "id": 1234

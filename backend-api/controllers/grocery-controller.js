@@ -1,10 +1,13 @@
-exports.showGroceryList = (req, res) => {
-  res.send('For showing grocery list');
-};
+const catchAsync = require('../utils/catchAsync');
 
-exports.updateGroceryList = (req, res) => {
+exports.showGroceryList = catchAsync(async (req, res, next) => {
+  res.send('For showing grocery list');
+});
+
+exports.updateGroceryList = catchAsync((req, res, next) => {
   res.send('For updating the grocery list');
-};
-exports.deleteGroceryList = (req, res) => {
+});
+
+exports.deleteGroceryList = catchAsync(async (req, res, next) => {
   res.send('For deleting grocery list');
-};
+});

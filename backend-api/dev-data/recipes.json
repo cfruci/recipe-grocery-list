@@ -4,29 +4,27 @@
     "cuisine": "Mexican",
     "addedToGroceryList": false,
     "ingredients": [
-      { "id": "Jalapeno", "type": "Produce", "quantity": 1, "unit": "" },
-      { "id": "Ground Turkey", "type": "Meat", "quantity": 1, "unit": "lb" }
+      { "name": "turkey", "type": "Produce", "quantity": 1 },
+      { "name": "chicken", "type": "Meat", "quantity": 1, "unit": "lb" }
     ]
   },
   {
     "name": "Chicken Bake",
     "cuisine": "Mediterranean",
-    "description": "A nice recipe, needs a salad",
     "addedToGroceryList": false,
     "ingredients": [
-      { "id": "Gold Potatoes", "type": "Produce", "quantity": 4, "unit": "" },
-      { "id": "Lemon", "type": "Produce", "quantity": 2, "unit": "" }
+      { "name": "lettuce", "type": "Produce", "quantity": 4, "unit": "tsp" },
+      { "name": "tomato", "type": "Produce", "quantity": 2, "unit": "fl oz" }
     ]
   },
   {
     "name": "Penne ala vodka",
     "cuisine": "Italian",
-    "description": "Penne ala vodka",
     "addedToGroceryList": false,
     "ingredients": [
-      { "id": "Penne", "type": "Pantry", "quantity": 1, "unit": "" },
+      { "name": "pasta", "type": "Pantry", "quantity": 1, "unit": "oz" },
       {
-        "id": "Heavy Whipping Cream",
+        "name": "whipping cream",
         "type": "Dairy",
         "quantity": 1,
         "unit": "lb"
@@ -36,10 +34,9 @@
   {
     "name": "Dim sum",
     "cuisine": "Chinese",
-    "description": "Very nice",
     "addedToGroceryList": false,
     "ingredients": [
-      { "id": "Rice", "type": "Pantry", "quantity": 1, "unit": "cup" }
+      { "name": "pork", "type": "Pantry", "quantity": 1, "unit": "cup" }
     ]
   }
 ]

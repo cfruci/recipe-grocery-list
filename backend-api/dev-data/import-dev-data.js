@@ -20,7 +20,7 @@ const importData = async () => {
     console.log('Recipes successfully added');
     process.exit();
   } catch (err) {
-    console.log('Something went wrong', err);
+    console.log('Something went wrong while adding the data', err);
     process.exit();
   }
 };
@@ -31,7 +31,7 @@ const deleteData = async () => {
     console.log('Recipes successfully deleted');
     process.exit();
   } catch (err) {
-    console.log('Something went wrong', err);
+    console.log('Something went wrong with deleting the data', err);
     process.exit();
   }
 };
