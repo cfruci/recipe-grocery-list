@@ -4,6 +4,7 @@ import { IngredientModel, RecipeModel } from '../../models/recipe';
 import { RecipesContext } from '../store/recipes-context';
 import styles from './NewRecipe.module.css';
 
+// COMPONENET BEGINS
 const NewRecipe: React.FC = () => {
   const recipesCtx = useContext(RecipesContext);
   const [ingredients, setIngredients] = useState<IngredientModel[]>([]);
@@ -50,13 +51,7 @@ const NewRecipe: React.FC = () => {
         <div className={styles.descriptors}>
           <div className={styles.control}>
             <label htmlFor="recipe-name">Recipe Name:</label>
-            <input
-              type="text"
-              id="recipe-name"
-              placeholder="Insert name..."
-              ref={recipeNameRef}
-              required
-            />
+            <input type="text" id="recipe-name" ref={recipeNameRef} required />
           </div>
           <div className={styles.control}>
             <label htmlFor="recipe-cuisine">Cuisine:</label>
@@ -64,17 +59,6 @@ const NewRecipe: React.FC = () => {
               type="text"
               id="recipe-cuisine"
               ref={recipeCuisineRef}
-              placeholder="Describe cuisine..."
-              required
-            />
-          </div>
-          <div className={styles.control}>
-            <label htmlFor="recipe-description">Description:</label>
-            <input
-              type="text"
-              ref={recipeDescriptionRef}
-              id="recipe-description"
-              placeholder="Describe recipe..."
               required
             />
           </div>

@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
+const cors = require('cors');
 // const rateLimiter = require('express-rate-limiter');
 
 // LOCAL IMPORTS
@@ -19,9 +20,13 @@ const recipeRouter = require('./routes/recipeRoutes');
 const groceryRouter = require('./routes/groceryRoutes');
 
 // GLOBAL MIDDLEWARE
-// PROTECTION AGAINST PARAMETER POLUTION
-app.use(hpp());
-
+app.use(hpp()); // protection against parameter pollutions
+app.use(
+  cors({
+    origin: 'http://localhost:3002',
+  })
+);
+app.options('*', cors());
 // RATE LIMITER
 // const limiter = rateLimiter({
 //   max: 100,
@@ -31,10 +36,8 @@ app.use(hpp());
 
 // app.use('/', limiter);
 
-// PROTECTION AGAINST CROSS-SITE SCRIPTING ATTACKS
-app.use(xss());
-// protection against NoSQL query injections
-app.use(mongoSanitize());
+app.use(xss()); // protection against cross-site scripting attacks
+app.use(mongoSanitize()); // protection against NoSQL query injections
 
 app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
@@ -44,7 +47,7 @@ if (process.env.NODE_ENV === 'development') {
 // MIDDLEWARE ROUTERS
 app.use('/', homeRouter);
 app.use('/recipes', recipeRouter);
-app.use('/users', userRouter);
+// app.use('/users', userRouter);
 app.use('/grocery-list', groceryRouter);
 
 app.all('*', (req, res, next) => {
