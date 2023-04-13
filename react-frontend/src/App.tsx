@@ -8,7 +8,6 @@ import ErrorPage from './pages/ErrorPage';
 import HomePage, { loader as recipesLoader } from './pages/HomePage';
 import GroceryListPage from './pages/GroceryListPage';
 import RecipePage from './pages/RecipePage';
-import TestPage from './pages/testPage';
 
 // context imports
 import { RecipesContextProvider } from './components/store/recipes-context';
@@ -24,7 +23,6 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage />, loader: recipesLoader },
       { path: '/recipes/:recipeId', element: <RecipePage /> },
       { path: '/grocery-list', element: <GroceryListPage /> },
-      { path: '/test-page', element: <TestPage />, loader: recipesLoader },
     ],
   },
 ]);

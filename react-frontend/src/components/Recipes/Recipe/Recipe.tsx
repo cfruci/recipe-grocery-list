@@ -24,12 +24,12 @@ const Recipe: React.FC<{ recipe: RecipeModel }> = ({ recipe }) => {
   };
 
   const seeRecipeHandler = (event: any) => {
-    navigate('/recipes/' + recipe.id);
+    navigate('/recipes/' + recipe._id);
   };
 
   return (
     <div className={styles.recipe} onClick={seeRecipeHandler}>
-      <h2>{recipe.id}</h2>
+      <h2>{recipe._id}</h2>
       {!addedToGroceryList ? (
         <button onClick={addToGroceryList} className={styles.addBtn}>
           Add to Grocery List

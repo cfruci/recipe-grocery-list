@@ -13,19 +13,19 @@ const GroceryList: React.FC = () => {
 
   const meats = groceriesCtx.groceries
     .filter((grocery) => grocery.type === 'Meat')
-    .map((grocery) => <GroceryItem key={grocery.id} grocery={grocery} />);
+    .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
   const produce = groceriesCtx.groceries
     .filter((grocery) => grocery.type === 'Produce')
-    .map((grocery) => <GroceryItem key={grocery.id} grocery={grocery} />);
+    .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
   const dairy = groceriesCtx.groceries
     .filter((grocery) => grocery.type === 'Dairy')
-    .map((grocery) => <GroceryItem key={grocery.id} grocery={grocery} />);
+    .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
   const pantry = groceriesCtx.groceries
     .filter((grocery) => grocery.type === 'Pantry')
-    .map((grocery) => <GroceryItem key={grocery.id} grocery={grocery} />);
+    .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
   return (
     <>

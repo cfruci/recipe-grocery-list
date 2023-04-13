@@ -23,7 +23,7 @@ export const GroceriesContextProvider: React.FC<Props> = (props) => {
 
   const deleteIngredientHandler = (ingredient: IngredientModel) => {
     const existingIngredientIndex = groceries.findIndex(
-      (grocery) => grocery.id === ingredient.id
+      (grocery) => grocery._id === ingredient._id
     );
     if (groceries[existingIngredientIndex].quantity > 1) {
       const existingIngredientQuantity =
@@ -39,7 +39,7 @@ export const GroceriesContextProvider: React.FC<Props> = (props) => {
       });
     } else {
       setGroceries((prevGroceries) =>
-        prevGroceries.filter((grocery) => grocery.id !== ingredient.id)
+        prevGroceries.filter((grocery) => grocery._id !== ingredient._id)
       );
     }
   };
@@ -50,18 +50,18 @@ export const GroceriesContextProvider: React.FC<Props> = (props) => {
     } = {};
 
     groceries.forEach((grocery) => {
-      if (!groceriesHash[grocery.id]) {
-        groceriesHash[grocery.id] = true;
+      if (!groceriesHash[grocery.ingredientName]) {
+        groceriesHash[grocery.ingredientName] = true;
       }
     });
 
     ingredients.forEach((ingredient) => {
-      if (!groceriesHash[ingredient.id]) {
-        groceriesHash[ingredient.id] = true;
+      if (!groceriesHash[ingredient.ingredientName]) {
+        groceriesHash[ingredient.ingredientName] = true;
         setGroceries((prevGroceries) => prevGroceries.concat(ingredient));
       } else {
         const existingIndex = groceries.findIndex(
-          (grocery) => grocery.id === ingredient.id
+          (grocery) => grocery.ingredientName === ingredient.ingredientName
         );
         const updatedQuantity = groceries[existingIndex].quantity + 1;
 

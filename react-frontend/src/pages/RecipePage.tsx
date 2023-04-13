@@ -9,13 +9,13 @@ const RecipePage: React.FC = () => {
   const recipeId = params.recipeId;
   const recipesCtx = useContext(RecipesContext);
 
-  const { id } = recipesCtx.recipes.filter(
-    (recipe) => recipe.id === recipeId
+  const { _id } = recipesCtx.recipes.filter(
+    (recipe) => recipe._id === recipeId
   )[0];
 
   return (
     <>
-      <h2>{id}</h2>
+      <h2>{_id}</h2>
       <Ingredients />
     </>
   );

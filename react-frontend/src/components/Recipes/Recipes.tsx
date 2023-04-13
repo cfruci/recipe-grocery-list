@@ -17,13 +17,13 @@ const Recipes: React.FC = () => {
   };
 
   let recipes = recipesCtx.recipes.map((recipe) => (
-    <Recipe key={recipe.id} recipe={recipe} />
+    <Recipe key={recipe._id} recipe={recipe} />
   ));
 
   if (cuisine !== 'All') {
     recipes = recipesCtx.recipes
       .filter((recipe) => recipe.cuisine === cuisine)
-      .map((recipe) => <Recipe key={recipe.id} recipe={recipe} />);
+      .map((recipe) => <Recipe key={recipe._id} recipe={recipe} />);
   }
 
   const cuisines = recipesCtx.recipes.map((recipe) => recipe.cuisine);

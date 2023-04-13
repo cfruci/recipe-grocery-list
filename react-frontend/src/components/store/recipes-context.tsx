@@ -59,7 +59,7 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
     currentRecipeId: string
   ) => {
     const [recipeToUpdate] = recipes.filter(
-      (recipe) => recipe.id === currentRecipeId
+      (recipe) => recipe._id === currentRecipeId
     );
     const prevIngredients = [...recipeToUpdate.ingredients];
     const updatedRecipe = {
@@ -68,7 +68,7 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
     };
     setRecipes((prevRecipes) => {
       const indexToUpdate = prevRecipes.findIndex(
-        (recipe) => recipe.id === currentRecipeId
+        (recipe) => recipe._id === currentRecipeId
       );
       const newRecipes = [...prevRecipes];
       newRecipes[indexToUpdate] = updatedRecipe;
@@ -85,18 +85,18 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
     currentRecipeId: string
   ) => {
     const [recipeToUpdate] = recipes.filter(
-      (recipe) => recipe.id === currentRecipeId
+      (recipe) => recipe._id === currentRecipeId
     );
     const prevIngredients = [...recipeToUpdate.ingredients];
     const updatedRecipe = {
       ...recipeToUpdate,
       ingredients: prevIngredients.filter(
-        (ingredient) => ingredient.id !== ingredientId
+        (ingredient) => ingredient._id !== ingredientId
       ),
     };
     setRecipes((prevRecipes) => {
       const indexToUpdate = prevRecipes.findIndex(
-        (recipe) => recipe.id === currentRecipeId
+        (recipe) => recipe._id === currentRecipeId
       );
       const newRecipes = [...prevRecipes];
       newRecipes[indexToUpdate] = updatedRecipe;
@@ -109,12 +109,12 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
     currentRecipe: RecipeModel
   ) => {
     const [recipeToUpdate] = recipes.filter(
-      (recipe) => recipe.id === currentRecipe.id
+      (recipe) => recipe._id === currentRecipe._id
     );
     const prevIngredients = [...recipeToUpdate.ingredients];
 
     const updatedIngredients = prevIngredients.map((prevIngredient) => {
-      if (prevIngredient.id === ingredient.id) {
+      if (prevIngredient._id === ingredient._id) {
         return ingredient;
       }
       return prevIngredient;
@@ -126,7 +126,7 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
     };
     setRecipes((prevRecipes) => {
       const indexToUpdate = prevRecipes.findIndex(
-        (recipe) => recipe.id === currentRecipe.id
+        (recipe) => recipe._id === currentRecipe._id
       );
       const newRecipes = [...prevRecipes];
       newRecipes[indexToUpdate] = updatedRecipe;

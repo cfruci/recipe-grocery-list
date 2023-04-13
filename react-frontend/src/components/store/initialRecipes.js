@@ -1,62 +1,42 @@
 export const initialRecipes = [
-	{
-		id: "Turkey Bake",
-		cuisine: "Mexican",
-		description: "A delicious meal, 30-min",
-		addedToGroceryList: false,
-		ingredients: [
-			{
-				id: "Jalapeno",
-				type: "Produce",
-				quantity: 1,
-				unit: "",
-			},
-			{
-				id: "Ground Turkey",
-				type: "Meat",
-				quantity: 1,
-				unit: "lb",
-			},
-		],
-	},
-	{
-		id: "Greek Chicken",
-		cuisine: "Mediterranean",
-		description: "A nice recipe, needs a salad",
-		addedToGroceryList: false,
-		ingredients: [
-			{
-				id: "Gold Potatoes",
-				type: "Produce",
-				quantity: 4,
-				unit: "",
-			},
-			{
-				id: "Lemon",
-				type: "Produce",
-				quantity: 2,
-				unit: "",
-			},
-		],
-	},
-	{
-		id: "Pasta",
-		cuisine: "Italian",
-		description: "Penne ala vodka",
-		addedToGroceryList: false,
-		ingredients: [
-			{
-				id: "Penne",
-				type: "Pantry",
-				quantity: 1,
-				unit: "",
-			},
-			{
-				id: "Heavy Whipping Cream",
-				type: "Dairy",
-				quantity: 1,
-				unit: "lb",
-			},
-		],
-	},
+  {
+    recipeName: 'Turkey Bake',
+    cuisine: 'Mexican',
+    addedToGroceryList: false,
+    ingredients: [
+      { ingredientName: 'turkey', type: 'Produce', quantity: 1 },
+      { ingredientName: 'chicken', type: 'Meat', quantity: 1, unit: 'lb' },
+    ],
+  },
+  {
+    recipeName: 'Chicken Bake',
+    cuisine: 'Mediterranean',
+    addedToGroceryList: false,
+    ingredients: [
+      { ingredientName: 'lettuce', type: 'Produce', quantity: 4, unit: 'tsp' },
+      { ingredientName: 'tomato', type: 'Produce', quantity: 2, unit: 'fl oz' },
+    ],
+  },
+  {
+    recipeName: 'Penne ala vodka',
+    cuisine: 'Italian',
+    addedToGroceryList: false,
+    ingredients: [
+      { ingredientName: 'pasta', type: 'Pantry', quantity: 1, unit: 'oz' },
+      {
+        ingredientName: 'whipping cream',
+        type: 'Dairy',
+        quantity: 1,
+        unit: 'lb',
+      },
+    ],
+  },
+  {
+    recipeName: 'Dim sum',
+    cuisine: 'Chinese',
+    addedToGroceryList: false,
+    ingredients: [
+      { ingredientName: 'pork', type: 'Pantry', quantity: 1, unit: 'cup' },
+    ],
+  },
 ];

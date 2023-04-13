@@ -1,5 +1,5 @@
-import NewRecipe from '../components/NewRecipe/NewRecipe';
 import Recipes from '../components/Recipes/Recipes';
+import NewRecipe from '../components/NewRecipe/NewRecipe';
 
 const HomePage: React.FC = () => {
   return (
@@ -15,9 +15,9 @@ export default HomePage;
 export async function loader() {
   const response = await fetch('http://localhost:3000/recipes');
   if (!response) {
-    // ...
+    throw new Error('no data came from the back end');
   } else {
-    const resData = await response.json();
-    return resData.data;
+    const { data } = await response.json();
+    return data;
   }
 }

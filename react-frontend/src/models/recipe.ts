@@ -1,13 +1,16 @@
 export type RecipeModel = {
-  id: string;
+  _id?: string;
+  recipeName: string;
+  slug?: string;
   cuisine: string;
-  description: string;
+  addedToGroceryList?: boolean;
   ingredients: IngredientModel[];
 };
 
 export type IngredientModel = {
-  id: string;
+  _id?: string;
+  ingredientName: string;
   type: string;
   quantity: number;
-  unit: string;
+  unit?: string;
 };

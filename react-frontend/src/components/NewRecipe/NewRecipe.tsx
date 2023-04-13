@@ -20,7 +20,7 @@ const NewRecipe: React.FC = () => {
   const addNewIngredient = (event: React.FormEvent) => {
     event.preventDefault();
     const newIngredient: IngredientModel = {
-      id: ingredientInputRef.current!.value,
+      ingredientName: ingredientInputRef.current!.value,
       type: ingredientTypeRef.current!.value,
       quantity: parseInt(ingredientQuantityRef.current!.value),
       unit: ingredientUnitRef.current!.value,
@@ -32,8 +32,7 @@ const NewRecipe: React.FC = () => {
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     const newRecipe: RecipeModel = {
-      id: recipeNameRef.current!.value,
-      description: recipeDescriptionRef.current!.value,
+      recipeName: recipeNameRef.current!.value,
       cuisine: recipeCuisineRef.current!.value,
       ingredients,
     };
