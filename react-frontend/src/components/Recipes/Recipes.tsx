@@ -1,36 +1,36 @@
-import { useContext, useState } from 'react';
-// import { useLoaderData } from 'react-router-dom';
+import { useState } from 'react';
 import styles from './Recipes.module.css';
 
 import Recipe from './Recipe/Recipe';
-import { RecipesContext } from '../store/recipes-context';
-// import { RecipeModel } from '../../models/recipe';
+import { RecipeModel } from '../../models/recipe';
 
 // COMPONENET BEGINS
-const Recipes: React.FC = () => {
-  const recipesCtx = useContext(RecipesContext);
+const Recipes: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
   const [cuisine, setCuisine] = useState('All');
-  // const backendRecipes = useLoaderData() as any;
 
-  const onCuisineChangeHandler = (event: any): void => {
+  const cuisines = recipes.map((recipe) => recipe.cuisine);
+
+  const onCuisineChangeHandler = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
     setCuisine(event.target.value);
   };
 
-  let recipes = recipesCtx.recipes.map((recipe) => (
-    <Recipe key={recipe._id} recipe={recipe} />
-  ));
+  let filteredRecipes = [];
 
   if (cuisine !== 'All') {
-    recipes = recipesCtx.recipes
+    filteredRecipes = recipes
       .filter((recipe) => recipe.cuisine === cuisine)
       .map((recipe) => <Recipe key={recipe._id} recipe={recipe} />);
+  } else {
+    filteredRecipes = recipes.map((recipe) => (
+      <Recipe key={recipe._id} recipe={recipe} />
+    ));
   }
-
-  const cuisines = recipesCtx.recipes.map((recipe) => recipe.cuisine);
 
   return (
     <>
-      <label htmlFor="cuisine">Choose Cuisine:</label>
+      <label htmlFor="cuisine">Choose cuisine: </label>
       <select id="cuisine" onChange={onCuisineChangeHandler}>
         <option defaultValue={'All'} value="All">
           All
@@ -41,8 +41,7 @@ const Recipes: React.FC = () => {
           </option>
         ))}
       </select>
-
-      <ul className={styles.recipes}>{recipes}</ul>
+      <ul className={styles.recipes}>{filteredRecipes}</ul>
     </>
   );
 };

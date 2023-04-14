@@ -10,7 +10,7 @@ import AuthForm from '../components/AuthForm/AuthForm';
 import { AuthContext } from '../components/store/auth-context';
 
 // COMPONENET BEGINS
-const RootLayout: React.FC = () => {
+const RootLayout = () => {
   const authCtx = useContext(AuthContext);
   return (
     <>

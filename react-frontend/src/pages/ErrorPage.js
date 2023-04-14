@@ -1,6 +1,6 @@
 import MainNav from '../components/MainNav/MainNav';
 
-const ErrorPage: React.FC = () => {
+const ErrorPage = () => {
   return (
     <>
       <MainNav />

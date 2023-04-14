@@ -13,6 +13,7 @@ const DB = process.env.DATABASE.replace(
 mongoose.connect(DB).then(() => console.log('Connection successful'));
 
 const recipes = JSON.parse(fs.readFileSync(`${__dirname}/recipes.json`));
+console.log(recipes);
 
 const importData = async () => {
   try {

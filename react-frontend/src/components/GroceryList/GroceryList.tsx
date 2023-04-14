@@ -3,28 +3,31 @@ import { useContext } from 'react';
 import styles from './GroceryList.module.css';
 import { GroceriesContext } from '../store/groceries-context';
 import GroceryItem from './GroceryItem';
+import { IngredientModel } from '../../models/recipe';
 
-const GroceryList: React.FC = () => {
+const GroceryList: React.FC<{ groceries: IngredientModel[] }> = ({
+  groceries,
+}) => {
   const groceriesCtx = useContext(GroceriesContext);
 
   const onClearHandler = () => {
     groceriesCtx.clearList();
   };
 
-  const meats = groceriesCtx.groceries
-    .filter((grocery) => grocery.type === 'Meat')
+  const meats = groceries
+    .filter((grocery) => grocery.type === 'meat')
     .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
-  const produce = groceriesCtx.groceries
-    .filter((grocery) => grocery.type === 'Produce')
+  const produce = groceries
+    .filter((grocery) => grocery.type === 'produce')
     .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
-  const dairy = groceriesCtx.groceries
-    .filter((grocery) => grocery.type === 'Dairy')
+  const dairy = groceries
+    .filter((grocery) => grocery.type === 'dairy')
     .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
-  const pantry = groceriesCtx.groceries
-    .filter((grocery) => grocery.type === 'Pantry')
+  const pantry = groceries
+    .filter((grocery) => grocery.type === 'pantry')
     .map((grocery) => <GroceryItem key={grocery._id} grocery={grocery} />);
 
   return (
@@ -69,7 +72,7 @@ const GroceryList: React.FC = () => {
           ''
         )}
       </ul>
-      {groceriesCtx.groceries.length > 0 ? (
+      {groceries.length > 0 ? (
         <button onClick={onClearHandler}>Clear List</button>
       ) : null}
     </>

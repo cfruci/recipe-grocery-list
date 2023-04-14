@@ -33,7 +33,7 @@ const MainNav: React.FC = () => {
               </li>
               <li>
                 <NavLink
-                  to="/grocery-list"
+                  to="/groceries"
                   className={({ isActive }) =>
                     isActive ? styles.active : undefined
                   }

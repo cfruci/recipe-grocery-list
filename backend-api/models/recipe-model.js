@@ -45,6 +45,10 @@ const ingredientSchema = new mongoose.Schema({
     },
     trim: true,
   },
+  inGroceryList: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // primary recipe schema used to validate new recipes

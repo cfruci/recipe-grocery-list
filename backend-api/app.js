@@ -48,7 +48,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/', homeRouter);
 app.use('/recipes', recipeRouter);
 // app.use('/users', userRouter);
-app.use('/grocery-list', groceryRouter);
+app.use('/groceries', groceryRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));

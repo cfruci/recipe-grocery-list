@@ -12,39 +12,40 @@ exports.getAllRecipes = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'Success',
     results: recipes.length,
-    data: recipes,
+    recipes,
   });
 });
 
 // POSTS a new recipe for a given user
 exports.addNewRecipe = catchAsync(async (req, res, next) => {
   const newRecipe = await Recipe.create(req.body);
-  res.status(200).json({ status: 'Success', data: newRecipe });
+  res.status(200).json({ status: 'Success', newRecipe });
 });
 
 // GETS a single recipe for a given user
 exports.getRecipe = catchAsync(async (req, res, next) => {
-  const recipe = await Recipe.findById(req.params.id);
+  const { slug } = req.params;
+  const recipe = await Recipe.findOne({ slug });
   if (!recipe) {
     return next(new AppError('That recipe could not be found', 404));
   }
-  res.status(200).json({ status: 'Success', data: recipe });
+  res.status(200).json({ status: 'Success', recipe });
 });
 
-// PATCHES a recipe for a given user
 exports.updateRecipe = catchAsync(async (req, res, next) => {
-  const updatedRecipe = await Recipe.findByIdAndUpdate(
-    req.params.id,
+  const updatedRecipe = await Recipe.findOneAndUpdate(
+    req.params.slug,
     req.body,
     {
       new: true,
-      runValidators: true,
     }
   );
-  res.status(200).json({ status: 'Success', data: updatedRecipe });
+  if (!updatedRecipe) {
+    return next(new AppError('Could not find recipe'));
+  }
+  res.status(200).json({ status: 'Success', updatedRecipe });
 });
 
-// DELETES a recipe for a given user
 exports.deleteRecipe = catchAsync(async (req, res, next) => {
   const recipe = await Recipe.findByIdAndDelete(req.params.id);
   if (!recipe) {

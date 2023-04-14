@@ -6,8 +6,10 @@ import './App.css';
 import RootLayout from './pages/RootLayout';
 import ErrorPage from './pages/ErrorPage';
 import HomePage, { loader as recipesLoader } from './pages/HomePage';
-import GroceryListPage from './pages/GroceryListPage';
-import RecipePage from './pages/RecipePage';
+import RecipePage, { loader as recipeLoader } from './pages/RecipePage';
+import GroceriesPage, {
+  loader as groceriesLoader,
+} from './pages/GroceriesPage';
 
 // context imports
 import { RecipesContextProvider } from './components/store/recipes-context';
@@ -21,8 +23,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage />, loader: recipesLoader },
-      { path: '/recipes/:recipeId', element: <RecipePage /> },
-      { path: '/grocery-list', element: <GroceryListPage /> },
+      {
+        path: '/recipes/:recipeSlug',
+        element: <RecipePage />,
+        loader: recipeLoader,
+      },
+      {
+        path: '/groceries',
+        element: <GroceriesPage />,
+        loader: groceriesLoader,
+      },
     ],
   },
 ]);

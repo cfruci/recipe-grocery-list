@@ -27,7 +27,7 @@ type RecipesContextObj = {
   ) => void;
   cancelUpdate: () => void;
   inEditMode: boolean;
-  addRecipeToGroceryList: (ingredients: IngredientModel[]) => void;
+  // addRecipeToGroceryList: (ingredients: IngredientModel[]) => void;
 };
 
 export const RecipesContext = createContext<RecipesContextObj>({
@@ -39,7 +39,7 @@ export const RecipesContext = createContext<RecipesContextObj>({
   updateIngredient: () => {},
   cancelUpdate: () => {},
   inEditMode: false,
-  addRecipeToGroceryList: () => {},
+  // addRecipeToGroceryList: () => {},
 });
 
 export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
@@ -138,9 +138,9 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
     setInEditMode(false);
   };
 
-  const addToGroceryListHandler = (ingredients: IngredientModel[]): void => {
-    groceriesCtx.addIngredients(ingredients);
-  };
+  // const addToGroceryListHandler = (ingredients: IngredientModel[]): void => {
+  //   groceriesCtx.addIngredients(ingredients);
+  // };
 
   const recipesCtx: RecipesContextObj = {
     recipes,
@@ -151,7 +151,7 @@ export const RecipesContextProvider: React.FC<Props> = ({ children }) => {
     updateIngredient: updateIngredientHandler,
     cancelUpdate: cancelUpdateHandler,
     inEditMode: inEditMode,
-    addRecipeToGroceryList: addToGroceryListHandler,
+    // addRecipeToGroceryList: addToGroceryListHandler,
   };
 
   return (

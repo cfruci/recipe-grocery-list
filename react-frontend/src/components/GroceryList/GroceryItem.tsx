@@ -10,7 +10,7 @@ const GroceryItem: React.FC<{
 
   return (
     <li className={styles.grocery}>
-      <span>{`${grocery._id}: ${grocery.quantity} ${grocery.unit}`}</span>
+      <span>{`${grocery.ingredientName}: ${grocery.quantity} ${grocery.unit}`}</span>
       <span
         className={styles.deleteBtn}
         onClick={() => {

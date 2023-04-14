@@ -1,21 +1,24 @@
-import { useContext, useRef, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Ingredients.module.css';
 
-import { RecipesContext } from '../store/recipes-context';
 import { IngredientModel } from '../../models/recipe';
 import ReadOnlyRow from './ReadOnlyRow';
 import EditOnlyRow from './EditOnlyRow';
 
-const Ingredients: React.FC = () => {
-  const recipesCtx = useContext(RecipesContext);
-  const params = useParams();
+const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
+  ingredients,
+}) => {
+  const navigate = useNavigate();
+
   const newIngredientName = useRef<HTMLInputElement>(null);
   const newIngredientQuantity = useRef<HTMLInputElement>(null);
-  const newIngredientUnit = useRef<HTMLInputElement>(null);
+  const newIngredientUnit = useRef<HTMLSelectElement>(null);
 
-  const [editIngredientId, setEditIngredientId] = useState<string | null>(null);
+  const [editIngredientName, setEditIngredientName] = useState<string | null>(
+    null
+  );
   const [editFormData, setEditFormData] = useState<IngredientModel>({
     ingredientName: '',
     type: '',
@@ -23,18 +26,12 @@ const Ingredients: React.FC = () => {
     unit: '',
   });
 
-  const navigate = useNavigate();
-
   const onNavigateHandler = () => {
-    navigate('/recipes');
+    navigate('/');
   };
 
-  const [currentRecipe] = recipesCtx.recipes.filter(
-    (recipe) => recipe._id === params.recipeId
-  );
-
   const editClickHandler = (ingredient: IngredientModel) => {
-    setEditIngredientId(ingredient.ingredientName);
+    setEditIngredientName(ingredient.ingredientName);
 
     const editFormData = {
       ingredientName: ingredient.ingredientName,
@@ -69,37 +66,19 @@ const Ingredients: React.FC = () => {
   };
 
   const deleteClickHandler = (ingredient: string) => {
-    recipesCtx.deleteIngredientFromRecipe(ingredient, currentRecipe.recipeName);
+    console.log('ingredient deleted');
   };
 
   const cancelClickHandler = () => {
-    setEditIngredientId(null);
+    setEditIngredientName(null);
   };
 
   const saveClickHandler = (event: React.FormEvent) => {
-    const updatedIngredient = {
-      ingredientName: editFormData.ingredientName,
-      type: editFormData.type,
-      quantity: editFormData.quantity,
-      unit: editFormData.unit,
-    };
-    event.preventDefault();
-    recipesCtx.updateIngredient(updatedIngredient, currentRecipe);
-    setEditIngredientId(null);
+    console.log('updated ingredient saved');
   };
 
   const addIngredientHandler = (event: React.FormEvent): void => {
-    event.preventDefault();
-
-    const newIngredient: IngredientModel = {
-      ingredientName: newIngredientName.current!.value,
-      type: newIngredientName.current!.value,
-      quantity: parseInt(newIngredientQuantity.current!.value),
-      unit: newIngredientUnit.current!.value,
-    };
-    if (currentRecipe?.recipeName) {
-      recipesCtx.addIngredientToRecipe(newIngredient, currentRecipe.recipeName);
-    }
+    console.log('added ingredient');
   };
 
   return (
@@ -115,8 +94,8 @@ const Ingredients: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {currentRecipe.ingredients.map((ingredient) => {
-              return editIngredientId === ingredient.ingredientName ? (
+            {ingredients.map((ingredient: IngredientModel) => {
+              return editIngredientName === ingredient.ingredientName ? (
                 <EditOnlyRow
                   key={ingredient._id}
                   ingredient={ingredient}
@@ -145,20 +124,32 @@ const Ingredients: React.FC = () => {
       >
         <input
           type="text"
-          placeholder="Enter ingredient name..."
+          placeholder="Ingredient..."
           ref={newIngredientName}
         />
         <input
           type="number"
-          placeholder="Enter quantity..."
+          placeholder="Quantity..."
           min={0}
           ref={newIngredientQuantity}
         />
-        <input
-          type="text"
-          placeholder="Enter unit... (e.g., lb, tsp)"
-          ref={newIngredientUnit}
-        />
+        <select id="unit" ref={newIngredientUnit}>
+          <option value="Unit...">Unit...</option>
+          <option value="mL">mL</option>
+          <option value="L">L</option>
+          <option value="tsp">tsp</option>
+          <option value="tbsp">tbsp</option>
+          <option value="fl oz">fl oz</option>
+          <option value="cup">cup</option>
+          <option value="pint">pint</option>
+          <option value="quart">quart</option>
+          <option value="gallon">gallon</option>
+          <option value="mg">mg</option>
+          <option value="g">g</option>
+          <option value="kg">kg</option>
+          <option value="lb">lb</option>
+          <option value="oz">oz</option>
+        </select>
         <button className={styles.ingredientBtns}>Add Ingredient</button>
       </form>
       <br />

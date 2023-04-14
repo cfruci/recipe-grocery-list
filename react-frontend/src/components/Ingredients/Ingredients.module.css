@@ -1,40 +1,40 @@
 .ingredients {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ingredientTable {
-	text-align: center;
-	border: 1px solid orange;
-	margin: auto;
-	padding: 1rem;
-	min-width: 30rem;
+  text-align: center;
+  border: 1px solid orange;
+  margin: auto;
+  padding: 1rem;
+  min-width: 30rem;
 }
 
 .ingredientBtns {
-	margin: 0.5rem;
+  margin: 0.5rem;
 }
 
 .ingredientBtns:hover {
-	background-color: orange;
-	cursor: pointer;
+  background-color: orange;
+  cursor: pointer;
 }
 
 .ingredientActions {
-	display: flex;
+  display: flex;
 }
 
 .newIngredient {
-	display: flex;
-	align-items: center;
-	gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .newIngredient input {
-	max-width: 7rem;
+  max-width: 7rem;
 }
 
 .leftColumn {
-	text-align: left;
+  text-align: left;
 }

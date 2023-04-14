@@ -25,7 +25,9 @@ const EditOnlyRow: React.FC<{
 }) => {
   return (
     <tr key={ingredient._id}>
-      <td className={styles.leftColumn}>{ingredient.ingredientName}</td>
+      <td className={styles.leftColumn}>
+        <input type="text" name="name" value={ingredient.ingredientName} />
+      </td>
       <td>
         <input
           type="number"

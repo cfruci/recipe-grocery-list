@@ -53,13 +53,8 @@ const NewRecipe: React.FC = () => {
             <input type="text" id="recipe-name" ref={recipeNameRef} required />
           </div>
           <div className={styles.control}>
-            <label htmlFor="recipe-cuisine">Cuisine:</label>
-            <input
-              type="text"
-              id="recipe-cuisine"
-              ref={recipeCuisineRef}
-              required
-            />
+            <label htmlFor="cuisine">Cuisine:</label>
+            <input type="text" id="cuisine" ref={recipeCuisineRef} required />
           </div>
         </div>
       </form>
