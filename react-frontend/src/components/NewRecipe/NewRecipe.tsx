@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from 'react';
+import { Form } from 'react-router-dom';
 
 import { IngredientModel, RecipeModel } from '../../models/recipe';
 import { RecipesContext } from '../store/recipes-context';
@@ -29,35 +30,66 @@ const NewRecipe: React.FC = () => {
     setIngredients((prevIngredient) => prevIngredient.concat(newIngredient));
   };
 
-  const onSubmitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-    const newRecipe: RecipeModel = {
-      recipeName: recipeNameRef.current!.value,
-      cuisine: recipeCuisineRef.current!.value,
-      ingredients,
-    };
-    recipesCtx.addRecipe(newRecipe);
-  };
+  // const onSubmitHandler = (event: React.FormEvent) => {
+  //   event.preventDefault();
+  //   const newRecipe: RecipeModel = {
+  //     recipeName: recipeNameRef.current!.value,
+  //     cuisine: recipeCuisineRef.current!.value,
+  //     ingredients,
+  //   };
+  //   recipesCtx.addRecipe(newRecipe);
+  // };
+
+  // const fetchURL = `http://localhost:3000/recipes/${recipe.slug}`;
+
+  // const addNewRecipe = async (url = '', data = {}) => {
+  //   const response = await fetch(url, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data),
+  //   });
+  //   if (!response) {
+  //     // handle error
+  //   }
+  //   return response.json();
+  // };
+  // const addNewRecipeHandler = () => {
+  //   const newRecipe = {};
+  //   addNewRecipe(fetchURL, newRecipe);
+  // };
 
   return (
     <>
-      <form
-        action=""
-        onSubmit={(event: React.FormEvent) => onSubmitHandler(event)}
-        className={styles.form}
-      >
+      <Form method="post" className={styles.form}>
         <h2>Add New Recipe</h2>
         <div className={styles.descriptors}>
           <div className={styles.control}>
             <label htmlFor="recipe-name">Recipe Name:</label>
-            <input type="text" id="recipe-name" ref={recipeNameRef} required />
+            <input
+              type="text"
+              id="recipe-name"
+              name="recipeName"
+              ref={recipeNameRef}
+              required
+            />
           </div>
           <div className={styles.control}>
             <label htmlFor="cuisine">Cuisine:</label>
-            <input type="text" id="cuisine" ref={recipeCuisineRef} required />
+            <input
+              type="text"
+              id="cuisine"
+              name="cuisine"
+              ref={recipeCuisineRef}
+              required
+            />
           </div>
         </div>
-      </form>
+        <button disabled={false} type="submit">
+          Save Recipe
+        </button>
+      </Form>
       {/* <form action="">
 				<div className="ingredients">
 					<h3>Ingredients</h3>
@@ -113,7 +145,7 @@ const NewRecipe: React.FC = () => {
 					</div>
 				</div>
 			</form>
-			<button disabled={false}>Save Recipe</button> */}
+			 */}
     </>
   );
 };

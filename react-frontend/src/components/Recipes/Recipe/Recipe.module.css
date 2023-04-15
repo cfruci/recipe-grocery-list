@@ -1,27 +1,25 @@
 .recipe {
-	padding: 1.5rem;
-	min-width: 15rem;
-	color: black;
-	background-color: white;
-	border-radius: 10px;
-	transition: all 0.2s;
+  padding: 1.5rem;
+  max-width: 15rem;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+  transition: all 0.2s;
 }
 
 .recipe:hover {
-	transform: scale(1.05);
-	cursor: pointer;
+  transform: scale(1.05);
 }
 
-.addBtn,
-.removeBtn {
-	margin: 0.2rem;
-	padding: 0.3rem;
-	border-radius: 5px;
-	border: solid 0.5px;
+.btn {
+  margin: 0.2rem;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: solid 0.5px;
 }
 
-.addBtn:hover,
-.removeBtn:hover {
-	background-color: orange;
-	cursor: pointer;
+.btn:hover,
+.btn:hover {
+  background-color: orange;
+  cursor: pointer;
 }

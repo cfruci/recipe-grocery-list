@@ -1,22 +1,20 @@
-import { useContext } from 'react';
+import { useSubmit } from 'react-router-dom';
 import { IngredientModel } from '../../models/recipe';
-import { GroceriesContext } from '../store/groceries-context';
 import styles from './GroceryItem.module.css';
 
 const GroceryItem: React.FC<{
   grocery: IngredientModel;
 }> = ({ grocery }) => {
-  const groceriesCtx = useContext(GroceriesContext);
+  const submit = useSubmit();
+
+  const onDeleteHandler = () => {
+    submit({ type: 'deleteIngredient' }, { method: 'patch' });
+  };
 
   return (
     <li className={styles.grocery}>
       <span>{`${grocery.ingredientName}: ${grocery.quantity} ${grocery.unit}`}</span>
-      <span
-        className={styles.deleteBtn}
-        onClick={() => {
-          return groceriesCtx.deleteIngredient(grocery);
-        }}
-      >
+      <span className={styles.deleteBtn} onClick={onDeleteHandler}>
         X
       </span>
     </li>

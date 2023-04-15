@@ -19,6 +19,9 @@ exports.getAllRecipes = catchAsync(async (req, res, next) => {
 // POSTS a new recipe for a given user
 exports.addNewRecipe = catchAsync(async (req, res, next) => {
   const newRecipe = await Recipe.create(req.body);
+  if (!newRecipe) {
+    next(new AppError('Could not save your new recipe'));
+  }
   res.status(200).json({ status: 'Success', newRecipe });
 });
 
@@ -33,21 +36,27 @@ exports.getRecipe = catchAsync(async (req, res, next) => {
 });
 
 exports.updateRecipe = catchAsync(async (req, res, next) => {
-  const updatedRecipe = await Recipe.findOneAndUpdate(
-    req.params.slug,
-    req.body,
-    {
-      new: true,
-    }
-  );
+  const { slug } = req.params;
+  const filter = { slug };
+
+  if (req.headers.addtogrocerylist === 'true') {
+    filter['ingredients.inGroceryList'] = false;
+  } else {
+    filter['ingredients.inGroceryList'] = true;
+  }
+  const updatedRecipe = await Recipe.findOneAndUpdate(filter, req.body, {
+    new: true,
+  });
   if (!updatedRecipe) {
     return next(new AppError('Could not find recipe'));
   }
+
   res.status(200).json({ status: 'Success', updatedRecipe });
 });
 
 exports.deleteRecipe = catchAsync(async (req, res, next) => {
-  const recipe = await Recipe.findByIdAndDelete(req.params.id);
+  const { slug } = req.params;
+  const recipe = await Recipe.findOneAndDelete({ slug });
   if (!recipe) {
     return next(new AppError('That receipe was not found', 404));
   }

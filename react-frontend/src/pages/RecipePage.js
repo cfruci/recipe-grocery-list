@@ -1,10 +1,9 @@
-import { useLoaderData } from 'react-router-dom';
+import { redirect, useLoaderData, json } from 'react-router-dom';
 
 import Ingredients from '../components/Ingredients/Ingredients';
 
 const RecipePage = () => {
-  const { data } = useLoaderData();
-  const recipe = data[0];
+  const { recipe } = useLoaderData();
 
   return (
     <>
@@ -20,10 +19,44 @@ export async function loader({ params }) {
   const { recipeSlug } = params;
   const response = await fetch(`http://localhost:3000/recipes/${recipeSlug}`);
 
-  if (!response) {
-    // handle error
+  if (!response.ok) {
+    throw json({ message: 'unable to fetch recipe' });
   } else {
     const recipeData = await response.json();
     return recipeData;
   }
+}
+
+export async function action({ request, params }) {
+  const method = request.method;
+  const recipeSlug = params.recipeSlug;
+  const headers = { 'content-type': 'application/json' };
+  const fetchUrl = 'http://localhost:3000/recipes/' + recipeSlug;
+  const formData = await request.formData();
+
+  let requestData;
+  if (formData.get('type') === 'addToGroceryList') {
+    headers.addToGroceryList = true;
+    requestData = {
+      $set: { addedToGroceryList: true, 'ingredients.$[].inGroceryList': true },
+    };
+  } else if (formData.get('type') === 'removeFromGroceryList') {
+    headers.addToGroceryList = false;
+    requestData = {
+      $set: {
+        addedToGroceryList: false,
+        'ingredients.$[].inGroceryList': false,
+      },
+    };
+  }
+
+  const response = await fetch(fetchUrl, {
+    method,
+    headers,
+    body: JSON.stringify(requestData),
+  });
+  if (!response.ok) {
+    throw json({ message: 'Something did not go right' });
+  }
+  return redirect('/');
 }

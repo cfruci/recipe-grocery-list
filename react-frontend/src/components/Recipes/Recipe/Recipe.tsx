@@ -1,55 +1,64 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSubmit } from 'react-router-dom';
 
 import { RecipeModel } from '../../../models/recipe';
+
 import styles from './Recipe.module.css';
 
-const toggleGroceryList = async (url = '', data = {}) => {
-  const response = await fetch(url, {
-    method: 'PATCH',
-    body: JSON.stringify(data),
-  });
-  return response.json();
-};
-
 // COMPONENET BEGINS
-const Recipe: React.FC<{ recipe: RecipeModel }> = ({ recipe }) => {
+const Recipe: React.FC<{
+  recipe: RecipeModel;
+}> = ({ recipe }) => {
   const navigate = useNavigate();
-  const seeRecipeHandler = (event: any) => {
+  const submit = useSubmit();
+  const seeRecipeHandler = () => {
     navigate(`/recipes/${recipe.slug}`);
   };
 
-  const fetchURL = `http://localhost:3000/recipes/${recipe.slug}`;
-
-  const addToGroceryListHandler = (event: any): void => {
-    event.stopPropagation();
-    const response = toggleGroceryList(fetchURL, { addedToGroceryList: true });
-
-    if (!response) {
-      // handle error
-    }
+  const addToGroceryListHandler = () => {
+    submit(
+      { type: 'addToGroceryList' },
+      { method: 'patch', action: `/recipes/${recipe.slug}` }
+    );
   };
 
-  const removeFromGroceryListHandler = (event: any) => {
-    event.stopPropation();
+  const removeFromGroceryListHandler = () => {
+    submit(
+      { type: 'removeFromGroceryList' },
+      { method: 'patch', action: `/recipes/${recipe.slug}` }
+    );
+  };
 
-    const response = toggleGroceryList(fetchURL, { addedToGroceryList: false });
-
-    if (!response) {
-      // handle error
+  const deleteRecipeHandler = () => {
+    const confirmed = window.confirm('Are you sure?');
+    if (confirmed) {
+      submit(null, { method: 'delete', action: `/recipes/${recipe.slug}` });
     }
   };
 
   return (
-    <div className={styles.recipe} onClick={seeRecipeHandler}>
+    <div className={styles.recipe}>
       <h2>{recipe.recipeName}</h2>
+      <button className={styles.btn} onClick={seeRecipeHandler}>
+        Edit Recipe
+      </button>
+      <button className={styles.btn} onClick={deleteRecipeHandler}>
+        Delete Recipe
+      </button>
       {!recipe.addedToGroceryList ? (
-        <button className={styles.addBtn} onClick={addToGroceryListHandler}>
+        <button
+          className={styles.btn}
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+            addToGroceryListHandler()
+          }
+        >
           Add to Grocery List
         </button>
       ) : (
         <button
-          className={styles.removeBtn}
-          onClick={removeFromGroceryListHandler}
+          className={styles.btn}
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+            removeFromGroceryListHandler()
+          }
         >
           Remove from Grocery List
         </button>

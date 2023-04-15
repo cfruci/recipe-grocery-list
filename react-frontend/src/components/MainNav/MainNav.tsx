@@ -14,7 +14,7 @@ const MainNav: React.FC = () => {
 
   return (
     <header className={styles.mainHeader}>
-      <h1 className={styles.mainHeading}>Shop by Recipe</h1>
+      <h1 className={styles.mainHeading}>Recipies to Grocery List</h1>
       <p>Build a grocery list based on your favorite recipes</p>
       <nav className={styles.mainNav}>
         <ul className={styles.list}>

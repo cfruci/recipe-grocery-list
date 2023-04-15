@@ -40,6 +40,8 @@ app.use(xss()); // protection against cross-site scripting attacks
 app.use(mongoSanitize()); // protection against NoSQL query injections
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }

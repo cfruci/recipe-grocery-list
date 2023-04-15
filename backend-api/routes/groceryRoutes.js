@@ -6,7 +6,6 @@ const router = express.Router();
 router
   .route('/')
   .get(groceriesController.showGroceries)
-  .patch(groceriesController.editGrocery)
-  .delete(groceriesController.clearGroceries);
+  .patch(groceriesController.removeGrocery);
 
 module.exports = router;

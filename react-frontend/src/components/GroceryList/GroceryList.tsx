@@ -1,17 +1,16 @@
-import { useContext } from 'react';
+import { useSubmit } from 'react-router-dom';
 
 import styles from './GroceryList.module.css';
-import { GroceriesContext } from '../store/groceries-context';
 import GroceryItem from './GroceryItem';
 import { IngredientModel } from '../../models/recipe';
 
 const GroceryList: React.FC<{ groceries: IngredientModel[] }> = ({
   groceries,
 }) => {
-  const groceriesCtx = useContext(GroceriesContext);
+  const submit = useSubmit();
 
   const onClearHandler = () => {
-    groceriesCtx.clearList();
+    submit({ type: 'clearList' }, { method: 'patch' });
   };
 
   const meats = groceries

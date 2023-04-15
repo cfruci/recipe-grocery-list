@@ -5,15 +5,21 @@ import './App.css';
 // page imports
 import RootLayout from './pages/RootLayout';
 import ErrorPage from './pages/ErrorPage';
-import HomePage, { loader as recipesLoader } from './pages/HomePage';
-import RecipePage, { loader as recipeLoader } from './pages/RecipePage';
+import RecipesPage, {
+  loader as recipesLoader,
+  action as newRecipeSubmit,
+} from './pages/RecipesPage';
+import RecipePage, {
+  loader as recipeLoader,
+  action as recipeEdit,
+} from './pages/RecipePage';
 import GroceriesPage, {
   loader as groceriesLoader,
+  action as clearList,
 } from './pages/GroceriesPage';
 
 // context imports
 import { RecipesContextProvider } from './components/store/recipes-context';
-import { GroceriesContextProvider } from './components/store/groceries-context';
 import { AuthContextProvider } from './components/store/auth-context';
 
 const router = createBrowserRouter([
@@ -22,16 +28,23 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <HomePage />, loader: recipesLoader },
+      {
+        index: true,
+        element: <RecipesPage />,
+        loader: recipesLoader,
+        action: newRecipeSubmit,
+      },
       {
         path: '/recipes/:recipeSlug',
         element: <RecipePage />,
         loader: recipeLoader,
+        action: recipeEdit,
       },
       {
         path: '/groceries',
         element: <GroceriesPage />,
         loader: groceriesLoader,
+        action: clearList,
       },
     ],
   },
@@ -41,11 +54,9 @@ const router = createBrowserRouter([
 const App: React.FC = () => {
   return (
     <AuthContextProvider>
-      <GroceriesContextProvider>
-        <RecipesContextProvider>
-          <RouterProvider router={router} />
-        </RecipesContextProvider>
-      </GroceriesContextProvider>
+      <RecipesContextProvider>
+        <RouterProvider router={router} />
+      </RecipesContextProvider>
     </AuthContextProvider>
   );
 };

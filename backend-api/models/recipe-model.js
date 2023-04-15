@@ -56,7 +56,6 @@ const recipeSchema = new mongoose.Schema({
   recipeName: {
     type: String,
     required: [true, 'A recipe must have a name'],
-    unique: true,
     trim: true,
   },
   slug: String,
