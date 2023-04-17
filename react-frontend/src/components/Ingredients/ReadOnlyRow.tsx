@@ -12,6 +12,7 @@ const ReadOnlyRow: React.FC<{
       <td className={`${styles.ingredient} ${styles.leftColumn}`}>
         {ingredient.ingredientName}
       </td>
+      <td>{ingredient.type}</td>
       <td>{ingredient.quantity}</td>
       <td>{ingredient.unit}</td>
       <td className={styles.actions}>

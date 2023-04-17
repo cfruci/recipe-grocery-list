@@ -19,7 +19,7 @@ import GroceriesPage, {
 } from './pages/GroceriesPage';
 
 // context imports
-import { RecipesContextProvider } from './components/store/recipes-context';
+// import { RecipesContextProvider } from './components/store/recipes-context';
 import { AuthContextProvider } from './components/store/auth-context';
 
 const router = createBrowserRouter([
@@ -54,9 +54,7 @@ const router = createBrowserRouter([
 const App: React.FC = () => {
   return (
     <AuthContextProvider>
-      <RecipesContextProvider>
-        <RouterProvider router={router} />
-      </RecipesContextProvider>
+      <RouterProvider router={router} />
     </AuthContextProvider>
   );
 };

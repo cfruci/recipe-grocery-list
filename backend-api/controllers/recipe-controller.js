@@ -1,14 +1,14 @@
-// local require
 const Recipe = require('../models/recipe-model');
 
-// util requires
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-// GETS all recipes in the database for a given user
 exports.getAllRecipes = catchAsync(async (req, res, next) => {
   const queryForCuisine = req.query;
   const recipes = await Recipe.find(queryForCuisine);
+  if (!recipes) {
+    return next(new AppError('Cannot find your recipes', 404));
+  }
   res.status(200).json({
     status: 'Success',
     results: recipes.length,
@@ -16,7 +16,6 @@ exports.getAllRecipes = catchAsync(async (req, res, next) => {
   });
 });
 
-// POSTS a new recipe for a given user
 exports.addNewRecipe = catchAsync(async (req, res, next) => {
   const newRecipe = await Recipe.create(req.body);
   if (!newRecipe) {
@@ -25,7 +24,6 @@ exports.addNewRecipe = catchAsync(async (req, res, next) => {
   res.status(200).json({ status: 'Success', newRecipe });
 });
 
-// GETS a single recipe for a given user
 exports.getRecipe = catchAsync(async (req, res, next) => {
   const { slug } = req.params;
   const recipe = await Recipe.findOne({ slug });
@@ -36,19 +34,52 @@ exports.getRecipe = catchAsync(async (req, res, next) => {
 });
 
 exports.updateRecipe = catchAsync(async (req, res, next) => {
-  const { slug } = req.params;
-  const filter = { slug };
+  let filter = {};
+  let update = {};
 
-  if (req.headers.addtogrocerylist === 'true') {
-    filter['ingredients.inGroceryList'] = false;
-  } else {
-    filter['ingredients.inGroceryList'] = true;
+  const { slug } = req.params;
+
+  switch (req.headers.action) {
+    case 'addtogrocerylist':
+      filter = { slug, 'ingredients.inGroceryList': false };
+      update = req.body;
+      break;
+    case 'removefromgrocerylist':
+      filter = { slug, 'ingredients.inGroceryList': true };
+      update = req.body;
+      break;
+    case 'addingredient':
+      const newIngredient = req.body;
+      filter = { slug };
+      update = { $push: { ingredients: newIngredient } };
+      break;
+    case 'deleteingredient':
+      const { id } = req.body;
+      filter = { slug };
+      update = { $pull: { ingredients: { _id: id } } };
+      break;
+    case 'updateingredient':
+      const updatedIngredient = req.body;
+      console.log(updatedIngredient);
+      filter = { slug, 'ingredients._id': updatedIngredient.id };
+      update = {
+        $set: {
+          'ingredients.$.ingredientName': updatedIngredient.name,
+          'ingredients.$.type': updatedIngredient.type,
+          'ingredients.$.quantity': updatedIngredient.quantity,
+          'ingredients.$.unit': updatedIngredient.unit,
+        },
+      };
+      break;
+    default:
+      break;
   }
-  const updatedRecipe = await Recipe.findOneAndUpdate(filter, req.body, {
+
+  const updatedRecipe = await Recipe.findOneAndUpdate(filter, update, {
     new: true,
   });
   if (!updatedRecipe) {
-    return next(new AppError('Could not find recipe'));
+    return next(new AppError('Could not update the recipe'));
   }
 
   res.status(200).json({ status: 'Success', updatedRecipe });

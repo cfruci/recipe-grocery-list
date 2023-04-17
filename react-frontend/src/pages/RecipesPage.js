@@ -52,7 +52,7 @@ export async function action({ request }) {
     let requestData;
 
     if (formData.get('type') === 'addToGroceryList') {
-      headers.addToGroceryList = true;
+      headers.action = 'addtogrocerylist';
       requestData = {
         $set: {
           addedToGroceryList: true,
@@ -60,7 +60,7 @@ export async function action({ request }) {
         },
       };
     } else if (formData.get('type') === 'removeFromGroceryList') {
-      headers.addToGroceryList = false;
+      headers.action = 'removefromgrocerylist';
       requestData = {
         $set: {
           addedToGroceryList: false,
