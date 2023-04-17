@@ -2,43 +2,44 @@ import { useNavigate, useSubmit } from 'react-router-dom';
 
 import { RecipeModel } from '../../../models/recipe';
 
-import styles from './Recipe.module.css';
+import styles from './RecipeCard.module.css';
 
 // COMPONENET BEGINS
-const Recipe: React.FC<{
+const RecipeCard: React.FC<{
   recipe: RecipeModel;
 }> = ({ recipe }) => {
   const navigate = useNavigate();
   const submit = useSubmit();
-  const seeRecipeHandler = () => {
+
+  const editRecipeHandler = () => {
     navigate(`/recipes/${recipe.slug}`);
   };
 
   const addToGroceryListHandler = () => {
     submit(
-      { type: 'addToGroceryList' },
-      { method: 'patch', action: `/recipes/${recipe.slug}` }
+      { type: 'addToGroceryList', recipeSlug: recipe.slug! },
+      { method: 'PATCH' }
     );
   };
 
   const removeFromGroceryListHandler = () => {
     submit(
-      { type: 'removeFromGroceryList' },
-      { method: 'patch', action: `/recipes/${recipe.slug}` }
+      { type: 'removeFromGroceryList', recipeSlug: recipe.slug! },
+      { method: 'PATCH' }
     );
   };
 
   const deleteRecipeHandler = () => {
     const confirmed = window.confirm('Are you sure?');
     if (confirmed) {
-      submit(null, { method: 'delete', action: `/recipes/${recipe.slug}` });
+      submit({ recipeSlug: recipe.slug! }, { method: 'DELETE' });
     }
   };
 
   return (
     <div className={styles.recipe}>
       <h2>{recipe.recipeName}</h2>
-      <button className={styles.btn} onClick={seeRecipeHandler}>
+      <button className={styles.btn} onClick={editRecipeHandler}>
         Edit Recipe
       </button>
       <button className={styles.btn} onClick={deleteRecipeHandler}>
@@ -67,4 +68,4 @@ const Recipe: React.FC<{
   );
 };
 
-export default Recipe;
+export default RecipeCard;

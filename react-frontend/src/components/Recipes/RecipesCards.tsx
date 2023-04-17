@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import styles from './Recipes.module.css';
+import styles from './RecipesCards.module.css';
 
-import Recipe from './Recipe/Recipe';
+import RecipeCard from './RecipeCard/RecipeCard';
 import { RecipeModel } from '../../models/recipe';
 
 // COMPONENET BEGINS
-const Recipes: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
+const RecipesCards: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
   const [cuisine, setCuisine] = useState('All');
 
   const cuisines = recipes.map((recipe) => recipe.cuisine);
@@ -21,10 +21,10 @@ const Recipes: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
   if (cuisine !== 'All') {
     filteredRecipes = recipes
       .filter((recipe) => recipe.cuisine === cuisine)
-      .map((recipe) => <Recipe key={recipe._id} recipe={recipe} />);
+      .map((recipe) => <RecipeCard key={recipe._id} recipe={recipe} />);
   } else {
     filteredRecipes = recipes.map((recipe) => (
-      <Recipe key={recipe._id} recipe={recipe} />
+      <RecipeCard key={recipe._id} recipe={recipe} />
     ));
   }
 
@@ -46,4 +46,4 @@ const Recipes: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
   );
 };
 
-export default Recipes;
+export default RecipesCards;

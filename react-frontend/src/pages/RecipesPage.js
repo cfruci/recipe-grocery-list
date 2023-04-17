@@ -1,5 +1,5 @@
 import { json, redirect, useLoaderData } from 'react-router-dom';
-import Recipes from '../components/Recipes/Recipes';
+import RecipesCards from '../components/Recipes/RecipesCards';
 import NewRecipe from '../components/NewRecipe/NewRecipe';
 
 const RecipesPage = () => {
@@ -7,7 +7,7 @@ const RecipesPage = () => {
 
   return (
     <section>
-      <Recipes recipes={recipes} />
+      <RecipesCards recipes={recipes} />
       <NewRecipe />
     </section>
   );
@@ -26,20 +26,74 @@ export async function loader() {
 }
 
 export async function action({ request }) {
-  const data = await request.formData();
-  const newRecipe = {
-    recipeName: data.get('recipeName'),
-    cuisine: data.get('cuisine'),
-  };
-  const response = await fetch('http://localhost:3000/recipes', {
-    method: 'post',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(newRecipe),
-  });
-  if (!response.ok) {
-    throw json({ message: 'New recipe could not be added' });
+  const method = request.method;
+  const headers = { 'content-type': 'application/json' };
+  const formData = await request.formData();
+  const recipeSlug = formData.get('recipeSlug');
+
+  if (method === 'POST') {
+    const newRecipe = {
+      recipeName: formData.get('recipeName'),
+      cuisine: formData.get('cuisine'),
+    };
+
+    const response = await fetch('http://localhost:3000/recipes', {
+      method,
+      headers,
+      body: JSON.stringify(newRecipe),
+    });
+    if (!response.ok) {
+      throw json({ message: 'New recipe could not be added' });
+    }
+    return redirect('/');
   }
-  return redirect('/');
+
+  if (method === 'PATCH') {
+    let requestData;
+
+    if (formData.get('type') === 'addToGroceryList') {
+      headers.addToGroceryList = true;
+      requestData = {
+        $set: {
+          addedToGroceryList: true,
+          'ingredients.$[].inGroceryList': true,
+        },
+      };
+    } else if (formData.get('type') === 'removeFromGroceryList') {
+      headers.addToGroceryList = false;
+      requestData = {
+        $set: {
+          addedToGroceryList: false,
+          'ingredients.$[].inGroceryList': false,
+        },
+      };
+    }
+
+    const response = await fetch(
+      `http://localhost:3000/recipes/${recipeSlug}`,
+      {
+        method,
+        headers,
+        body: JSON.stringify(requestData),
+      }
+    );
+    if (!response.ok) {
+      throw json({ message: 'Something did not go right' });
+    }
+    return redirect('/');
+  }
+
+  if (method === 'DELETE') {
+    const response = await fetch(
+      `http://localhost:3000/recipes/${recipeSlug}`,
+      {
+        method,
+        headers,
+      }
+    );
+    if (!response.ok) {
+      throw json({ message: 'Something did not go right' });
+    }
+    return redirect('/');
+  }
 }

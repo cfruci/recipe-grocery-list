@@ -8,7 +8,10 @@ const GroceryItem: React.FC<{
   const submit = useSubmit();
 
   const onDeleteHandler = () => {
-    submit({ type: 'deleteIngredient' }, { method: 'patch' });
+    submit(
+      { type: 'deleteIngredient', name: grocery.ingredientName },
+      { method: 'patch' }
+    );
   };
 
   return (

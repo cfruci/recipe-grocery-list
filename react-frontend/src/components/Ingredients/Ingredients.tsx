@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useSubmit } from 'react-router-dom';
 
 import styles from './Ingredients.module.css';
 
@@ -10,8 +10,6 @@ import EditOnlyRow from './EditOnlyRow';
 const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
   ingredients,
 }) => {
-  const navigate = useNavigate();
-
   const newIngredientName = useRef<HTMLInputElement>(null);
   const newIngredientQuantity = useRef<HTMLInputElement>(null);
   const newIngredientUnit = useRef<HTMLSelectElement>(null);
@@ -25,10 +23,6 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
     quantity: 0,
     unit: '',
   });
-
-  const onNavigateHandler = () => {
-    navigate('/');
-  };
 
   const editClickHandler = (ingredient: IngredientModel) => {
     setEditIngredientName(ingredient.ingredientName);
@@ -65,8 +59,9 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
     setEditFormData(editingIngredient);
   };
 
+  const submit = useSubmit();
   const deleteClickHandler = (ingredient: string) => {
-    console.log('ingredient deleted');
+    submit({ type: 'deleteIngredient' }, { method: 'patch' });
   };
 
   const cancelClickHandler = () => {
@@ -153,7 +148,6 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
         <button className={styles.ingredientBtns}>Add Ingredient</button>
       </form>
       <br />
-      <button onClick={onNavigateHandler}>Back to All Recipes</button>
     </section>
   );
 };

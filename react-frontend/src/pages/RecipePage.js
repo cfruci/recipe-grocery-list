@@ -30,33 +30,19 @@ export async function loader({ params }) {
 export async function action({ request, params }) {
   const method = request.method;
   const recipeSlug = params.recipeSlug;
+  const formData = await request.formData();
   const headers = { 'content-type': 'application/json' };
   const fetchUrl = 'http://localhost:3000/recipes/' + recipeSlug;
-  const formData = await request.formData();
 
-  let requestData;
-  if (formData.get('type') === 'addToGroceryList') {
-    headers.addToGroceryList = true;
-    requestData = {
-      $set: { addedToGroceryList: true, 'ingredients.$[].inGroceryList': true },
-    };
-  } else if (formData.get('type') === 'removeFromGroceryList') {
-    headers.addToGroceryList = false;
-    requestData = {
-      $set: {
-        addedToGroceryList: false,
-        'ingredients.$[].inGroceryList': false,
-      },
-    };
-  }
-
+  // delete ingredient
   const response = await fetch(fetchUrl, {
     method,
     headers,
-    body: JSON.stringify(requestData),
   });
+
   if (!response.ok) {
-    throw json({ message: 'Something did not go right' });
+    throw json({ message: 'could not delete ingredient' });
   }
-  return redirect('/');
+
+  // add ingredient
 }

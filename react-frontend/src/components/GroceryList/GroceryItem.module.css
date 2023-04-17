@@ -1,26 +1,18 @@
 .grocery {
-	padding: 0.5rem;
-	margin: 0.5rem;
-	transition: all 0.1s;
-	display: flex;
-	justify-content: space-between;
-	cursor: default;
-}
-
-.grocery:hover {
-	scale: 1.01;
-	background-color: white;
-	color: black;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  transition: all 0.1s;
+  display: flex;
+  justify-content: space-between;
+  cursor: default;
 }
 
 .deleteBtn {
-	padding: 0rem 0.5rem;
-	background-color: lightgray;
-	color: black;
+  color: white;
 }
 
 .deleteBtn:hover {
-	background-color: black;
-	color: white;
-	cursor: pointer;
+  /* background-color: black; */
+  color: red;
+  cursor: pointer;
 }

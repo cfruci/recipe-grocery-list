@@ -15,7 +15,7 @@ import RecipePage, {
 } from './pages/RecipePage';
 import GroceriesPage, {
   loader as groceriesLoader,
-  action as clearList,
+  action as deleteGroceries,
 } from './pages/GroceriesPage';
 
 // context imports
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         path: '/groceries',
         element: <GroceriesPage />,
         loader: groceriesLoader,
-        action: clearList,
+        action: deleteGroceries,
       },
     ],
   },

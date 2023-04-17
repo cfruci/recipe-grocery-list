@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { redirect, useLoaderData, json } from 'react-router-dom';
 import GroceryList from '../components/GroceryList/GroceryList';
 
 const GroceriesPage = () => {
@@ -19,25 +19,35 @@ export async function loader() {
   }
 }
 
-export async function action({ params, request }) {
+export async function action({ request }) {
   const method = request.method;
   const formData = await request.formData();
   const headers = {
     'content-type': 'application/json',
   };
 
-  let requestData;
+  let requestData = {};
+
   if (formData.get('type') === 'clearList') {
     headers.action = 'clearList';
-    requestData = {
-      'ingredients.inGroceryList': true,
-    };
-  } else if (formData.get('type') === 'deleteIngredient') {
-    headers.action = 'deleteIngredient';
+    const response = await fetch('http://localhost:3000/groceries', {
+      method,
+      headers,
+    });
+    if (!response.ok) {
+      throw json({ message: 'could not clear the entire list' });
+    }
+    return redirect('/');
+  } else {
+    requestData.ingredient = formData.get('name');
+    const response = await fetch('http://localhost:3000/groceries', {
+      method,
+      headers,
+      body: JSON.stringify(requestData),
+    });
+    if (!response.ok) {
+      throw json({ message: 'could not delete ingredient' });
+    }
+    return redirect('/groceries');
   }
-  fetch('http://localhost:3000/groceries', {
-    method,
-    headers,
-    body: JSON.stringify(requestData),
-  });
 }
