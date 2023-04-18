@@ -44,6 +44,7 @@ const EditOnlyRow: React.FC<{
           <option defaultValue="Unit..." disabled>
             Unit...
           </option>
+          <option value="n/a">n/a</option>
           <option value="mL">mL</option>
           <option value="L">L</option>
           <option value="tsp">tsp</option>
@@ -61,13 +62,10 @@ const EditOnlyRow: React.FC<{
         </select>
       </td>
       <td className={styles.ingredientActions}>
-        <button type="submit" className={styles.ingredientBtns}>
+        <button type="submit" className={styles.btn}>
           Save
         </button>
-        <button
-          className={styles.ingredientBtns}
-          onClick={() => cancelClickHandler()}
-        >
+        <button className={styles.btn} onClick={() => cancelClickHandler()}>
           Cancel
         </button>
       </td>

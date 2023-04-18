@@ -60,7 +60,6 @@ exports.updateRecipe = catchAsync(async (req, res, next) => {
       break;
     case 'updateingredient':
       const updatedIngredient = req.body;
-      console.log(updatedIngredient);
       filter = { slug, 'ingredients._id': updatedIngredient.id };
       update = {
         $set: {
@@ -82,7 +81,7 @@ exports.updateRecipe = catchAsync(async (req, res, next) => {
     return next(new AppError('Could not update the recipe'));
   }
 
-  res.status(200).json({ status: 'Success', updatedRecipe });
+  res.status(200).json({ status: 'Success' });
 });
 
 exports.deleteRecipe = catchAsync(async (req, res, next) => {

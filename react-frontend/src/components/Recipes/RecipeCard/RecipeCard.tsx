@@ -39,30 +39,43 @@ const RecipeCard: React.FC<{
   return (
     <div className={styles.recipe}>
       <h2>{recipe.recipeName}</h2>
-      <button className={styles.btn} onClick={editRecipeHandler}>
-        Edit Recipe
-      </button>
-      <button className={styles.btn} onClick={deleteRecipeHandler}>
-        Delete Recipe
-      </button>
-      {!recipe.addedToGroceryList ? (
-        <button
-          className={styles.btn}
-          onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-            addToGroceryListHandler()
-          }
-        >
-          Add to Grocery List
-        </button>
+      {recipe.ingredients.length > 0 ? (
+        <>
+          <button className={styles.btn} onClick={editRecipeHandler}>
+            Edit Recipe
+          </button>
+          <button className={styles.btn} onClick={deleteRecipeHandler}>
+            Delete Recipe
+          </button>
+          {!recipe.addedToGroceryList ? (
+            <button
+              className={styles.btn}
+              onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                addToGroceryListHandler()
+              }
+            >
+              Add to Grocery List
+            </button>
+          ) : (
+            <button
+              className={styles.btn}
+              onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+                removeFromGroceryListHandler()
+              }
+            >
+              Remove from Grocery List
+            </button>
+          )}
+        </>
       ) : (
-        <button
-          className={styles.btn}
-          onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-            removeFromGroceryListHandler()
-          }
-        >
-          Remove from Grocery List
-        </button>
+        <>
+          <button className={styles.btn} onClick={editRecipeHandler}>
+            Add Ingredients
+          </button>
+          <button className={styles.btn} onClick={deleteRecipeHandler}>
+            Delete Recipe
+          </button>
+        </>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useFetcher, useSubmit } from 'react-router-dom';
+import { useFetcher } from 'react-router-dom';
 
 import styles from './Ingredients.module.css';
 
@@ -12,7 +12,6 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
   ingredients,
 }) => {
   const fetcher = useFetcher();
-  const submit = useSubmit();
 
   const [editIngredientName, setEditIngredientName] = useState<string | null>(
     null
@@ -28,6 +27,7 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
     setEditIngredientName(ingredient.ingredientName);
 
     const editFormData = {
+      id: ingredient._id,
       ingredientName: ingredient.ingredientName,
       type: ingredient.type,
       quantity: ingredient.quantity,
@@ -35,13 +35,6 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
     };
 
     setEditFormData(editFormData);
-  };
-
-  const deleteClickHandler = (ingredient: IngredientModel) => {
-    submit(
-      { action: 'deleteIngredient', ingredient: ingredient._id! },
-      { method: 'PATCH' }
-    );
   };
 
   const cancelClickHandler = () => {
@@ -57,6 +50,7 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
           hidden
           readOnly
         />
+
         <table className={styles.ingredientTable}>
           <thead className={styles.thead}>
             <tr>
@@ -81,7 +75,6 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
                   key={ingredient._id}
                   ingredient={ingredient}
                   editClickHandler={editClickHandler}
-                  deleteClickHandler={() => deleteClickHandler(ingredient)}
                 />
               );
             })}
@@ -89,7 +82,6 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
         </table>
       </fetcher.Form>
 
-      <h3>Add New Ingredient</h3>
       <NewIngredient />
       <br />
     </section>

@@ -5,10 +5,20 @@ import { IngredientModel } from '../../models/recipe';
 const ReadOnlyRow: React.FC<{
   ingredient: IngredientModel;
   editClickHandler: (ingredient: IngredientModel) => void;
-  deleteClickHandler: (ingredientName: string) => void;
-}> = ({ ingredient, editClickHandler, deleteClickHandler }) => {
+}> = ({ ingredient, editClickHandler }) => {
   return (
     <tr>
+      <td hidden>
+        <input
+          hidden
+          readOnly
+          name="deleteIngredient"
+          value="deleteIngredient"
+        />
+      </td>
+      <td hidden>
+        <input hidden readOnly value={ingredient._id} name="ingredientId" />
+      </td>
       <td className={`${styles.ingredient} ${styles.leftColumn}`}>
         {ingredient.ingredientName}
       </td>
@@ -17,17 +27,12 @@ const ReadOnlyRow: React.FC<{
       <td>{ingredient.unit}</td>
       <td className={styles.actions}>
         <button
-          className={styles.ingredientBtns}
+          className={styles.btn}
           onClick={() => editClickHandler(ingredient)}
         >
           Edit
         </button>
-        <button
-          className={styles.ingredientBtns}
-          onClick={() => deleteClickHandler(ingredient.ingredientName)}
-        >
-          Delete
-        </button>
+        <button className={styles.btn}>Delete</button>
       </td>
     </tr>
   );

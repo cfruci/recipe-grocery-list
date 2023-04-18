@@ -2,9 +2,7 @@ import { useRef } from 'react';
 import { Form } from 'react-router-dom';
 
 import styles from './NewRecipe.module.css';
-import NewIngredient from '../Ingredients/NewIngredient';
 
-// COMPONENET BEGINS
 const NewRecipe: React.FC = () => {
   const recipeNameRef = useRef<HTMLInputElement>(null);
   const recipeCuisineRef = useRef<HTMLInputElement>(null);
@@ -12,7 +10,7 @@ const NewRecipe: React.FC = () => {
   return (
     <>
       <Form method="post" className={styles.form}>
-        <h2>Add New Recipe</h2>
+        <h2>Start New Recipe</h2>
         <div className={styles.descriptors}>
           <div className={styles.control}>
             <label htmlFor="recipe-name">Recipe Name:</label>
@@ -35,10 +33,8 @@ const NewRecipe: React.FC = () => {
             />
           </div>
         </div>
-        <h3>Ingredients</h3>
-        {/* <NewIngredient /> */}
-        <button disabled={false} type="submit">
-          Save Recipe
+        <button disabled={false} type="submit" className={styles.btn}>
+          Add Recipe
         </button>
       </Form>
     </>

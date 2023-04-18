@@ -18,8 +18,6 @@ import GroceriesPage, {
   action as deleteGroceries,
 } from './pages/GroceriesPage';
 
-// context imports
-// import { RecipesContextProvider } from './components/store/recipes-context';
 import { AuthContextProvider } from './components/store/auth-context';
 
 const router = createBrowserRouter([
@@ -50,7 +48,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-// COMPONENET BEGINS
 const App: React.FC = () => {
   return (
     <AuthContextProvider>

@@ -6,6 +6,6 @@
   grid-template-columns: repeat(auto-fill, minmax(15rem, 3fr));
 }
 
-label[htmlForm='cuisine'] {
-  margin-right: 0.3rem;
+select {
+  border-radius: 5px;
 }

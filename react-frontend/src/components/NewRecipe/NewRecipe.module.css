@@ -24,11 +24,15 @@ input[id='cuisine'] {
   min-width: 5rem;
 }
 
-.addIngredientBtn {
-  margin: 0px;
-  padding: 0.25rem;
+.btn {
+  margin: 0.2rem;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: solid 0.5px;
 }
 
-button:hover {
+.btn:hover,
+.btn:hover {
   background-color: orange;
+  cursor: pointer;
 }
