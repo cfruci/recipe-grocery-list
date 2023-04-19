@@ -1,21 +1,45 @@
-import { useFetcher } from 'react-router-dom';
+import { useRef } from 'react';
+import { useSubmit } from 'react-router-dom';
 import styles from './Ingredients.module.css';
 
 const NewIngredient: React.FC = () => {
-  const fetcher = useFetcher();
+  const submit = useSubmit();
+  const newIngredientNameRef = useRef<HTMLInputElement>(null);
+  const newIngredientTypeRef = useRef<HTMLSelectElement>(null);
+  const newIngredientQuantityRef = useRef<HTMLInputElement>(null);
+  const newIngredientUnitRef = useRef<HTMLSelectElement>(null);
+
+  const submitNewIngredient = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    submit(
+      {
+        action: 'addNewIngredient',
+        newIngredientName: newIngredientNameRef.current!.value,
+        newIngredientType: newIngredientTypeRef.current!.value,
+        newIngredientQuantity: newIngredientQuantityRef.current!.value,
+        newIngredientUnit: newIngredientUnitRef.current!.value,
+      },
+      { method: 'PATCH' }
+    );
+    newIngredientNameRef.current!.value = '';
+    newIngredientTypeRef.current!.value = '';
+    newIngredientQuantityRef.current!.value = '';
+    newIngredientUnitRef.current!.value = '';
+  };
 
   return (
     <>
       <h3>Add New Ingredient</h3>
-      <fetcher.Form method="PATCH" className={styles.newIngredient}>
+      <form className={styles.newIngredient} onSubmit={submitNewIngredient}>
         <input
-          name="addIngredient"
-          value="addIngredient"
-          readOnly
-          hidden
-        ></input>
-        <input name="ingredientName" type="text" placeholder="Name..." />
-        <select name="type" id="">
+          name="ingredientName"
+          type="text"
+          placeholder="Name..."
+          ref={newIngredientNameRef}
+          required
+        />
+        <select name="type" id="" ref={newIngredientTypeRef} required>
           <option defaultValue="Type..." disabled>
             Type...
           </option>
@@ -29,8 +53,10 @@ const NewIngredient: React.FC = () => {
           placeholder="Quantity..."
           name="quantity"
           min={0}
+          ref={newIngredientQuantityRef}
+          required
         />
-        <select id="unit" name="unit">
+        <select id="unit" name="unit" ref={newIngredientUnitRef} required>
           <option defaultValue="Unit..." disabled>
             Unit...
           </option>
@@ -51,7 +77,7 @@ const NewIngredient: React.FC = () => {
           <option value="oz">oz</option>
         </select>
         <button className={styles.ingredientBtns}>Add Ingredient</button>
-      </fetcher.Form>
+      </form>
     </>
   );
 };

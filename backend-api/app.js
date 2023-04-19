@@ -23,7 +23,7 @@ const groceryRouter = require('./routes/groceryRoutes');
 app.use(hpp()); // protection against parameter pollutions
 app.use(
   cors({
-    origin: 'http://localhost:3002',
+    origin: 'http://localhost:3001',
   })
 );
 app.options('*', cors());
