@@ -74,7 +74,6 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
           })}
         </tbody>
       </table>
-
       <NewIngredient />
       <br />
     </section>

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useSubmit } from 'react-router-dom';
-import styles from './Ingredients.module.css';
+import styles from './NewIngredient.module.css';
 
 const NewIngredient: React.FC = () => {
   const submit = useSubmit();
@@ -75,7 +75,7 @@ const NewIngredient: React.FC = () => {
           <option value="lb">lb</option>
           <option value="oz">oz</option>
         </select>
-        <button className={styles.ingredientBtns}>Add Ingredient</button>
+        <button className={styles.btn}>Add Ingredient</button>
       </form>
     </>
   );
