@@ -22,6 +22,7 @@ const NewIngredient: React.FC = () => {
       },
       { method: 'PATCH' }
     );
+
     newIngredientNameRef.current!.value = '';
     newIngredientTypeRef.current!.value = '';
     newIngredientQuantityRef.current!.value = '';
@@ -33,13 +34,12 @@ const NewIngredient: React.FC = () => {
       <h3>Add New Ingredient</h3>
       <form className={styles.newIngredient} onSubmit={submitNewIngredient}>
         <input
-          name="ingredientName"
           type="text"
           placeholder="Name..."
           ref={newIngredientNameRef}
           required
         />
-        <select name="type" id="" ref={newIngredientTypeRef} required>
+        <select ref={newIngredientTypeRef} required>
           <option defaultValue="Type..." disabled>
             Type...
           </option>
@@ -51,12 +51,11 @@ const NewIngredient: React.FC = () => {
         <input
           type="number"
           placeholder="Quantity..."
-          name="quantity"
           min={0}
           ref={newIngredientQuantityRef}
           required
         />
-        <select id="unit" name="unit" ref={newIngredientUnitRef} required>
+        <select ref={newIngredientUnitRef} required>
           <option defaultValue="Unit..." disabled>
             Unit...
           </option>

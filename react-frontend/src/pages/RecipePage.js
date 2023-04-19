@@ -1,7 +1,6 @@
 import { redirect, useLoaderData, json, useNavigate } from 'react-router-dom';
 
 import Ingredients from '../components/Ingredients/Ingredients';
-import NewIngredient from '../components/Ingredients/NewIngredient';
 
 const RecipePage = () => {
   const { recipe } = useLoaderData();
@@ -41,7 +40,7 @@ export async function action({ request, params }) {
   const headers = { 'content-type': 'application/json' };
   const fetchUrl = 'http://localhost:3000/recipes/' + recipeSlug;
 
-  if (formData.get('deleteIngredient') === 'deleteIngredient') {
+  if (formData.get('action') === 'deleteIngredient') {
     headers.action = 'deleteingredient';
     const id = formData.get('ingredientId');
 
@@ -77,7 +76,7 @@ export async function action({ request, params }) {
     return redirect('/recipes/' + recipeSlug);
   }
 
-  if (formData.get('updateIngredient') === 'updateIngredient') {
+  if (formData.get('action') === 'saveIngredient') {
     headers.action = 'updateingredient';
 
     const updatedIngredient = {

@@ -1,27 +1,47 @@
+import { useRef } from 'react';
+import { useSubmit } from 'react-router-dom';
 import styles from './EditOnlyRow.module.css';
 
 import { IngredientModel } from '../../models/recipe';
 
 const EditOnlyRow: React.FC<{
   ingredient: IngredientModel;
+  saveIngredient: () => void;
   cancelClickHandler: () => void;
   editFormData: IngredientModel;
-}> = ({ ingredient, cancelClickHandler, editFormData }) => {
+}> = ({ ingredient, saveIngredient, cancelClickHandler, editFormData }) => {
+  const submit = useSubmit();
+  const ingredientNameRef = useRef<HTMLInputElement>(null);
+  const ingredientTypeRef = useRef<HTMLSelectElement>(null);
+  const ingredientQuantityRef = useRef<HTMLInputElement>(null);
+  const ingredientUnitRef = useRef<HTMLSelectElement>(null);
+
+  const saveClickHandler = () => {
+    submit(
+      {
+        action: 'saveIngredient',
+        ingredientId: ingredient._id!,
+        newName: ingredientNameRef.current!.value,
+        newType: ingredientTypeRef.current!.value,
+        newQuantity: ingredientQuantityRef.current!.value,
+        newUnit: ingredientUnitRef.current!.value,
+      },
+      { method: 'PATCH' }
+    );
+    saveIngredient();
+  };
+
   return (
     <tr key={ingredient._id}>
-      <td hidden>
-        {' '}
-        <input hidden readOnly name="ingredientId" value={ingredient._id} />
-      </td>
       <td className={styles.leftColumn}>
         <input
           type="text"
-          name="newName"
           defaultValue={editFormData.ingredientName}
+          ref={ingredientNameRef}
         />
       </td>
       <td>
-        <select name="newType" id="">
+        <select name="newType" id="" ref={ingredientTypeRef}>
           <option defaultValue="Type..." disabled>
             Type...
           </option>
@@ -37,10 +57,11 @@ const EditOnlyRow: React.FC<{
           name="newQuantity"
           min={0}
           defaultValue={editFormData.quantity}
+          ref={ingredientQuantityRef}
         />
       </td>
       <td>
-        <select id="unit" name="newUnit">
+        <select id="unit" name="newUnit" ref={ingredientUnitRef}>
           <option defaultValue="Unit..." disabled>
             Unit...
           </option>
@@ -62,7 +83,7 @@ const EditOnlyRow: React.FC<{
         </select>
       </td>
       <td className={styles.ingredientActions}>
-        <button type="submit" className={styles.btn}>
+        <button className={styles.btn} onClick={saveClickHandler}>
           Save
         </button>
         <button className={styles.btn} onClick={() => cancelClickHandler()}>

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useFetcher } from 'react-router-dom';
 
 import styles from './Ingredients.module.css';
 
@@ -11,8 +10,6 @@ import NewIngredient from './NewIngredient';
 const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
   ingredients,
 }) => {
-  const fetcher = useFetcher();
-
   const [editIngredientName, setEditIngredientName] = useState<string | null>(
     null
   );
@@ -37,50 +34,46 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
     setEditFormData(editFormData);
   };
 
+  const saveIngredient = () => {
+    setEditIngredientName(null);
+  };
+
   const cancelClickHandler = () => {
     setEditIngredientName(null);
   };
 
   return (
     <section className={styles.ingredients}>
-      <fetcher.Form method="PATCH">
-        <input
-          name="updateIngredient"
-          value="updateIngredient"
-          hidden
-          readOnly
-        />
-
-        <table className={styles.ingredientTable}>
-          <thead className={styles.thead}>
-            <tr>
-              <th className={styles.leftColumn}>Ingredient</th>
-              <th>Type</th>
-              <th>Quantity</th>
-              <th>Unit</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ingredients.map((ingredient: IngredientModel) => {
-              return editIngredientName === ingredient.ingredientName ? (
-                <EditOnlyRow
-                  key={ingredient._id}
-                  ingredient={ingredient}
-                  cancelClickHandler={cancelClickHandler}
-                  editFormData={editFormData}
-                />
-              ) : (
-                <ReadOnlyRow
-                  key={ingredient._id}
-                  ingredient={ingredient}
-                  editClickHandler={editClickHandler}
-                />
-              );
-            })}
-          </tbody>
-        </table>
-      </fetcher.Form>
+      <table className={styles.ingredientTable}>
+        <thead className={styles.thead}>
+          <tr>
+            <th className={styles.leftColumn}>Ingredient</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ingredients.map((ingredient: IngredientModel) => {
+            return editIngredientName === ingredient.ingredientName ? (
+              <EditOnlyRow
+                key={ingredient._id}
+                ingredient={ingredient}
+                saveIngredient={saveIngredient}
+                cancelClickHandler={cancelClickHandler}
+                editFormData={editFormData}
+              />
+            ) : (
+              <ReadOnlyRow
+                key={ingredient._id}
+                ingredient={ingredient}
+                editClickHandler={editClickHandler}
+              />
+            );
+          })}
+        </tbody>
+      </table>
 
       <NewIngredient />
       <br />
