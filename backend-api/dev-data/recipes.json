@@ -1,7 +1,7 @@
 [
   {
     "recipeName": "Turkey Bake",
-    "cuisine": "Mexican",
+    "cuisine": "mexican",
     "ingredients": [
       { "ingredientName": "turkey", "type": "Produce", "quantity": 1 },
       {
@@ -14,7 +14,7 @@
   },
   {
     "recipeName": "Chicken Bake",
-    "cuisine": "Mediterranean",
+    "cuisine": "mediterranean",
     "ingredients": [
       {
         "ingredientName": "lettuce",
@@ -32,7 +32,7 @@
   },
   {
     "recipeName": "Penne ala vodka",
-    "cuisine": "Italian",
+    "cuisine": "italian",
     "ingredients": [
       {
         "ingredientName": "pasta",
@@ -50,7 +50,7 @@
   },
   {
     "recipeName": "Dim sum",
-    "cuisine": "Chinese",
+    "cuisine": "chinese",
     "addedToGroceryList": false,
     "ingredients": [
       {

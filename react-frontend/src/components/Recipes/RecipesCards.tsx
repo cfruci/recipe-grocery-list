@@ -7,8 +7,13 @@ import { RecipeModel } from '../../models/recipe';
 // COMPONENET BEGINS
 const RecipesCards: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
   const [cuisine, setCuisine] = useState('All');
+  const cuisinesHash: any = {};
 
-  const cuisines = recipes.map((recipe) => recipe.cuisine);
+  recipes.forEach((recipe) => {
+    cuisinesHash[recipe.cuisine] = true;
+  });
+
+  const cuisines = Object.keys(cuisinesHash);
 
   const onCuisineChangeHandler = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -30,7 +35,7 @@ const RecipesCards: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
 
   return (
     <>
-      <label htmlFor="cuisine">Choose cuisine: </label>
+      <label htmlFor="cuisine">Your cuisines: </label>
       <select id="cuisine" onChange={onCuisineChangeHandler}>
         <option defaultValue={'All'} value="All">
           All
