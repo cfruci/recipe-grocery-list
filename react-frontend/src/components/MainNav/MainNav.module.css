@@ -1,40 +1,53 @@
 .mainHeader {
-	display: flex;
-	flex-direction: column;
-	max-width: 60rem;
-	margin: auto;
-	padding: 1rem;
-	text-align: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 60rem;
+  margin: auto;
+  padding: 1rem;
+  text-align: center;
 }
 
 .mainHeading {
-	margin: 1rem;
+  margin: 1rem;
 }
 
 .mainHeader p {
-	font-style: italic;
-	margin: 0rem;
+  font-style: italic;
+  margin: 0rem;
 }
 
 .mainNav {
-	margin: 1rem 0rem 0rem;
-	display: flex;
-	justify-content: center;
+  margin: 1rem 0rem 0rem;
+  display: flex;
+  justify-content: center;
 }
 
 .list {
-	display: flex;
-	gap: 1rem;
-	align-items: center;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .list a {
-	text-decoration: none;
-	color: white;
+  text-decoration: none;
+  color: white;
 }
 
 .list a.active,
 .list a:hover {
-	text-decoration: underline;
-	color: orange;
+  text-decoration: underline;
+  color: orange;
+}
+
+.btn {
+  margin: 0.2rem;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: solid 0.5px;
+  min-width: 5rem;
+}
+
+.btn:hover {
+  background-color: orange;
+  cursor: pointer;
 }

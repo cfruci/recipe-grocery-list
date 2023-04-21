@@ -2,9 +2,9 @@ import { useState } from 'react';
 import styles from './RecipesCards.module.css';
 
 import RecipeCard from './RecipeCard/RecipeCard';
+// import CuisineSelect from './CuisineSelect';
 import { RecipeModel } from '../../models/recipe';
 
-// COMPONENET BEGINS
 const RecipesCards: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
   const [cuisine, setCuisine] = useState('All');
   const cuisinesHash: any = {};
@@ -35,17 +35,24 @@ const RecipesCards: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
 
   return (
     <>
-      <label htmlFor="cuisine">Your cuisines: </label>
-      <select id="cuisine" onChange={onCuisineChangeHandler}>
-        <option defaultValue={'All'} value="All">
-          All
-        </option>
-        {cuisines.map((cuisine) => (
-          <option key={cuisine} value={cuisine}>
-            {cuisine}
+      <section className={styles.cuisineSelect}>
+        <label htmlFor="cuisine">Your cuisines: </label>
+        <select id="cuisine" onChange={onCuisineChangeHandler}>
+          <option defaultValue={'All'} value="All">
+            All
           </option>
-        ))}
-      </select>
+          {cuisines.map((cuisine) => (
+            <option key={cuisine} value={cuisine}>
+              {cuisine}
+            </option>
+          ))}
+        </select>
+      </section>
+
+      {/* <CuisineSelect
+        cuisines={cuisines}
+        onCuisineChangeHandler={onCuisineChangeHandler}
+      /> */}
       <ul className={styles.recipes}>{filteredRecipes}</ul>
     </>
   );

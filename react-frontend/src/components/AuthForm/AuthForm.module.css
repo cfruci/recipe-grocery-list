@@ -1,0 +1,46 @@
+.header {
+  font-weight: bold;
+}
+
+.authForm {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  padding: 0.5rem;
+  align-items: center;
+}
+
+.inputs {
+  border: 1px black solid;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+label {
+  width: 5rem;
+}
+
+input {
+  min-width: 15rem;
+}
+
+.loginBtn,
+.newActBtn {
+  margin: 0.2rem;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: solid 0.5px;
+  min-width: 5rem;
+}
+
+.loginBtn:hover,
+.newActBtn:hover {
+  cursor: pointer;
+  background-color: orange;
+}

@@ -15,7 +15,7 @@ const app = express();
 
 // ROUTERS
 const homeRouter = require('./routes/homeRoutes');
-const userRouter = require('./routes/userRoutes');
+// const userRouter = require('./routes/userRoutes');
 const recipeRouter = require('./routes/recipeRoutes');
 const groceryRouter = require('./routes/groceryRoutes');
 
@@ -23,7 +23,7 @@ const groceryRouter = require('./routes/groceryRoutes');
 app.use(hpp()); // protection against parameter pollutions
 app.use(
   cors({
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3003',
   })
 );
 app.options('*', cors());

@@ -41,9 +41,11 @@ const MainNav: React.FC = () => {
                   Grocery List
                 </NavLink>
               </li>
-              {/* <li>
-                <button onClick={authCtx.logOut}>Log Out</button>
-              </li> */}
+              <li>
+                <button onClick={authCtx.logOut} className={styles.btn}>
+                  Log Out
+                </button>
+              </li>
             </>
           )}
         </ul>

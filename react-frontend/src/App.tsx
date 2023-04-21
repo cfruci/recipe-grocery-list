@@ -5,10 +5,10 @@ import './App.css';
 // page imports
 import RootLayout from './pages/RootLayout';
 import ErrorPage from './pages/ErrorPage';
-import RecipesPage, {
+import HomePage, {
   loader as recipesLoader,
   action as newRecipeSubmit,
-} from './pages/RecipesPage';
+} from './pages/HomePage';
 import RecipePage, {
   loader as recipeLoader,
   action as recipeEdit,
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <RecipesPage />,
+        element: <HomePage />,
         loader: recipesLoader,
         action: newRecipeSubmit,
       },

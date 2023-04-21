@@ -2,7 +2,7 @@ import { json, redirect, useLoaderData } from 'react-router-dom';
 import RecipesCards from '../components/Recipes/RecipesCards';
 import NewRecipe from '../components/NewRecipe/NewRecipe';
 
-const RecipesPage = () => {
+const HomePage = () => {
   const { recipes } = useLoaderData();
 
   return (
@@ -13,7 +13,7 @@ const RecipesPage = () => {
   );
 };
 
-export default RecipesPage;
+export default HomePage;
 
 export async function loader() {
   const response = await fetch('http://localhost:3000/recipes');
