@@ -16,7 +16,7 @@ const HomePage = () => {
 export default HomePage;
 
 export async function loader() {
-  const response = await fetch('/api/recipes');
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/recipes`);
   if (!response) {
     throw new Error('no data came from the back end');
   } else {
@@ -29,6 +29,7 @@ export async function action({ request }) {
   const method = request.method;
   const headers = { 'content-type': 'application/json' };
   const formData = await request.formData();
+  const fetchURL = `${process.env.REACT_APP_API_URL}`;
   const recipeSlug = formData.get('recipeSlug');
 
   if (formData.get('action') === 'newRecipe') {
@@ -37,7 +38,7 @@ export async function action({ request }) {
       cuisine: formData.get('cuisine').toLowerCase(),
     };
 
-    const response = await fetch('/api/recipes', {
+    const response = await fetch(fetchURL + '/recipes', {
       method,
       headers,
       body: JSON.stringify(newRecipe),
@@ -70,7 +71,7 @@ export async function action({ request }) {
     }
 
     const response = await fetch(
-      `http://localhost:3000/api/recipes/${recipeSlug}`,
+      `${process.env.REACT_APP_API_URL}/recipes/${recipeSlug}`,
       {
         method,
         headers,
@@ -84,13 +85,10 @@ export async function action({ request }) {
   }
 
   if (method === 'DELETE') {
-    const response = await fetch(
-      `http://localhost:3000/api/recipes/${recipeSlug}`,
-      {
-        method,
-        headers,
-      }
-    );
+    const response = await fetch(fetchURL + `/recipes/${recipeSlug}`, {
+      method,
+      headers,
+    });
     if (!response.ok) {
       throw json({ message: 'Something did not go right' });
     }

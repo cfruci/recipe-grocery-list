@@ -26,10 +26,6 @@ label {
   width: 5rem;
 }
 
-input {
-  min-width: 15rem;
-}
-
 .loginBtn,
 .newActBtn {
   margin: 0.2rem;

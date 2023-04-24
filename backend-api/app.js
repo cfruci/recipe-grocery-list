@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const dotenv = require("dotenv");
 const xss = require("xss-clean");
 const mongoSanitize = require("express-mongo-sanitize");
 const hpp = require("hpp");
@@ -17,6 +18,7 @@ const groceryRouter = require("./src/routes/groceryRoutes");
 // const userRouter = require('./routes/userRoutes');
 
 const app = express();
+dotenv.config({ path: "./config.env" });
 
 app.use(hpp()); // protection against parameter pollutions
 app.use(compression()); // compresses response bodies
@@ -26,10 +28,9 @@ app.use(xss()); // protection against cross-site scripting attacks
 app.use(mongoSanitize()); // protection against NoSQL query injections
 const limiter = RateLimit({
 	windowMs: 1 * 60 * 1000, // one minute
-	max: 20,
+	max: 200,
 });
-app.use(limiter);
-
+app.use(limiter); // limits API requests
 app.use(express.json()); // for pasring incoming json
 app.use(express.urlencoded({ extended: true })); // for parsing form data
 

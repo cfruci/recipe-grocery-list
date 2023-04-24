@@ -40,7 +40,7 @@ export async function action({ request, params }) {
   const recipeSlug = params.recipeSlug;
   const formData = await request.formData();
   const headers = { 'content-type': 'application/json' };
-  const fetchUrl = 'http://localhost:3000/api/recipes/' + recipeSlug;
+  const fetchUrl = `${process.env.REACT_APP_API_URL}/recipes/` + recipeSlug;
 
   if (formData.get('action') === 'deleteIngredient') {
     headers.action = 'deleteingredient';
