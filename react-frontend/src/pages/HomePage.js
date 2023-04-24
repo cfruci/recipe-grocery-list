@@ -31,8 +31,6 @@ export async function action({ request }) {
   const formData = await request.formData();
   const recipeSlug = formData.get('recipeSlug');
 
-  console.log(formData.get('recipeName'));
-
   if (formData.get('action') === 'newRecipe') {
     const newRecipe = {
       recipeName: formData.get('recipeName'),

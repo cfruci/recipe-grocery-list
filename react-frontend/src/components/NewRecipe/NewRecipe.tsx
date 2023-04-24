@@ -29,7 +29,7 @@ const NewRecipe: React.FC = () => {
         <h2>Start New Recipe</h2>
         <div className={styles.descriptors}>
           <div className={styles.control}>
-            <label htmlFor="recipe-name">Recipe Name:</label>
+            <label htmlFor="recipe-name">Name:</label>
             <input
               type="text"
               id="recipe-name"
