@@ -23,7 +23,9 @@ export default RecipePage;
 
 export async function loader({ params }) {
   const { recipeSlug } = params;
-  const response = await fetch(`http://localhost:3000/recipes/${recipeSlug}`);
+  const response = await fetch(
+    `http://localhost:3000/api/recipes/${recipeSlug}`
+  );
 
   if (!response.ok) {
     throw json({ message: 'unable to fetch recipe' });
@@ -38,7 +40,7 @@ export async function action({ request, params }) {
   const recipeSlug = params.recipeSlug;
   const formData = await request.formData();
   const headers = { 'content-type': 'application/json' };
-  const fetchUrl = 'http://localhost:3000/recipes/' + recipeSlug;
+  const fetchUrl = 'http://localhost:3000/api/recipes/' + recipeSlug;
 
   if (formData.get('action') === 'deleteIngredient') {
     headers.action = 'deleteingredient';

@@ -16,7 +16,7 @@ const HomePage = () => {
 export default HomePage;
 
 export async function loader() {
-  const response = await fetch('http://localhost:3000/recipes');
+  const response = await fetch('/api/recipes');
   if (!response) {
     throw new Error('no data came from the back end');
   } else {
@@ -37,7 +37,7 @@ export async function action({ request }) {
       cuisine: formData.get('cuisine').toLowerCase(),
     };
 
-    const response = await fetch('http://localhost:3000/recipes', {
+    const response = await fetch('/api/recipes', {
       method,
       headers,
       body: JSON.stringify(newRecipe),
@@ -70,7 +70,7 @@ export async function action({ request }) {
     }
 
     const response = await fetch(
-      `http://localhost:3000/recipes/${recipeSlug}`,
+      `http://localhost:3000/api/recipes/${recipeSlug}`,
       {
         method,
         headers,
@@ -85,7 +85,7 @@ export async function action({ request }) {
 
   if (method === 'DELETE') {
     const response = await fetch(
-      `http://localhost:3000/recipes/${recipeSlug}`,
+      `http://localhost:3000/api/recipes/${recipeSlug}`,
       {
         method,
         headers,

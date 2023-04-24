@@ -2,7 +2,6 @@ import { useState } from 'react';
 import styles from './RecipesCards.module.css';
 
 import RecipeCard from './RecipeCard/RecipeCard';
-// import CuisineSelect from './CuisineSelect';
 import { RecipeModel } from '../../models/recipe';
 
 const RecipesCards: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
@@ -48,11 +47,6 @@ const RecipesCards: React.FC<{ recipes: RecipeModel[] }> = ({ recipes }) => {
           ))}
         </select>
       </section>
-
-      {/* <CuisineSelect
-        cuisines={cuisines}
-        onCuisineChangeHandler={onCuisineChangeHandler}
-      /> */}
       <ul className={styles.recipes}>{filteredRecipes}</ul>
     </>
   );

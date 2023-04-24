@@ -5,6 +5,8 @@ const mongoSanitize = require("express-mongo-sanitize");
 const hpp = require("hpp");
 const cors = require("cors");
 const compression = require("compression");
+const helmet = require("helmet");
+const RateLimit = require("express-rate-limit");
 
 const AppError = require("./src/utils/appError");
 const globalErrorController = require("./src/controllers/error-controller");
@@ -18,11 +20,15 @@ const app = express();
 
 app.use(hpp()); // protection against parameter pollutions
 app.use(compression()); // compresses response bodies
-app.use(cors({ origin: "http://localhost:3002" }));
-app.options("*", cors()); // enables CORS for client requests
-
+app.use(helmet()); // common vulnerability protection
+app.use(cors()); // cors enabled for all origins
 app.use(xss()); // protection against cross-site scripting attacks
 app.use(mongoSanitize()); // protection against NoSQL query injections
+const limiter = RateLimit({
+	windowMs: 1 * 60 * 1000, // one minute
+	max: 20,
+});
+app.use(limiter);
 
 app.use(express.json()); // for pasring incoming json
 app.use(express.urlencoded({ extended: true })); // for parsing form data
@@ -31,10 +37,10 @@ if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
 
-app.use("/", homeRouter);
-app.use("/recipes", recipeRouter);
-app.use("/groceries", groceryRouter);
-// app.use('/users', userRouter);
+app.use("/api", homeRouter);
+app.use("/api/recipes", recipeRouter);
+app.use("/api/groceries", groceryRouter);
+// app.use('/api/users', userRouter);
 
 app.all("*", (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));

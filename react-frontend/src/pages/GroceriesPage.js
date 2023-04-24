@@ -10,7 +10,7 @@ const GroceriesPage = () => {
 export default GroceriesPage;
 
 export async function loader() {
-  const response = await fetch('http://localhost:3000/groceries', {});
+  const response = await fetch('http://localhost:3000/api/groceries', {});
   if (!response) {
     throw new Error('something went wrong');
   } else {
@@ -30,7 +30,7 @@ export async function action({ request }) {
 
   if (formData.get('type') === 'clearList') {
     headers.action = 'clearList';
-    const response = await fetch('http://localhost:3000/groceries', {
+    const response = await fetch('http://localhost:3000/api/groceries', {
       method,
       headers,
     });
@@ -40,7 +40,7 @@ export async function action({ request }) {
     return redirect('/');
   } else {
     requestData.ingredient = formData.get('name');
-    const response = await fetch('http://localhost:3000/groceries', {
+    const response = await fetch('http://localhost:3000/api/groceries', {
       method,
       headers,
       body: JSON.stringify(requestData),
