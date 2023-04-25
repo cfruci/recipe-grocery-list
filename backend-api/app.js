@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const xss = require("xss-clean");
@@ -37,6 +38,8 @@ app.use(express.urlencoded({ extended: true })); // for parsing form data
 if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
+
+app.use(express.static(path.join(__dirname, "../react-frontend/build")));
 
 app.use("/api", homeRouter);
 app.use("/api/recipes", recipeRouter);

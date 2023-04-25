@@ -10,7 +10,12 @@ const GroceriesPage = () => {
 export default GroceriesPage;
 
 export async function loader() {
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/groceries`);
+  const fetchURL =
+    process.env.REACT_APP_NODE_ENV === 'development'
+      ? `http://${process.env.REACT_APP_API_URL}`
+      : `https://${process.env.VERCEL_URL}`;
+
+  const response = await fetch(`${fetchURL}/groceries`);
   if (!response) {
     throw new Error('something went wrong');
   } else {
@@ -22,16 +27,19 @@ export async function loader() {
 export async function action({ request }) {
   const method = request.method;
   const formData = await request.formData();
-  const fetchURL = `${process.env.REACT_APP_API_URL}`;
   const headers = {
     'content-type': 'application/json',
   };
+  const fetchURL =
+    process.env.REACT_APP_NODE_ENV === 'development'
+      ? `http://${process.env.REACT_APP_API_URL}`
+      : `https://${process.env.VERCEL_URL}`;
 
   let requestData = {};
 
   if (formData.get('type') === 'clearList') {
     headers.action = 'clearList';
-    const response = await fetch(fetchURL + '/groceries', {
+    const response = await fetch(`${fetchURL}/groceries`, {
       method,
       headers,
     });
@@ -41,7 +49,7 @@ export async function action({ request }) {
     return redirect('/');
   } else {
     requestData.ingredient = formData.get('name');
-    const response = await fetch(fetchURL + '/groceries', {
+    const response = await fetch(`${fetchURL}/groceries`, {
       method,
       headers,
       body: JSON.stringify(requestData),

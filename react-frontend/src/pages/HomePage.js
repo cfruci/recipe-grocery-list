@@ -16,7 +16,12 @@ const HomePage = () => {
 export default HomePage;
 
 export async function loader() {
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/recipes`);
+  const fetchURL =
+    process.env.REACT_APP_NODE_ENV === 'development'
+      ? `http://${process.env.REACT_APP_API_URL}`
+      : `https://${process.env.VERCEL_URL}`;
+
+  const response = await fetch(`${fetchURL}/recipes`);
   if (!response) {
     throw new Error('no data came from the back end');
   } else {
@@ -29,8 +34,11 @@ export async function action({ request }) {
   const method = request.method;
   const headers = { 'content-type': 'application/json' };
   const formData = await request.formData();
-  const fetchURL = `${process.env.REACT_APP_API_URL}`;
   const recipeSlug = formData.get('recipeSlug');
+  const fetchURL =
+    process.env.REACT_APP_NODE_ENV === 'development'
+      ? `http://${process.env.REACT_APP_API_URL}`
+      : `https://${process.env.VERCEL_URL}`;
 
   if (formData.get('action') === 'newRecipe') {
     const newRecipe = {
@@ -38,7 +46,7 @@ export async function action({ request }) {
       cuisine: formData.get('cuisine').toLowerCase(),
     };
 
-    const response = await fetch(fetchURL + '/recipes', {
+    const response = await fetch(`${fetchURL}/recipes`, {
       method,
       headers,
       body: JSON.stringify(newRecipe),
@@ -70,14 +78,11 @@ export async function action({ request }) {
       };
     }
 
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}/recipes/${recipeSlug}`,
-      {
-        method,
-        headers,
-        body: JSON.stringify(requestData),
-      }
-    );
+    const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`, {
+      method,
+      headers,
+      body: JSON.stringify(requestData),
+    });
     if (!response.ok) {
       throw json({ message: 'Something did not go right' });
     }
@@ -85,7 +90,7 @@ export async function action({ request }) {
   }
 
   if (method === 'DELETE') {
-    const response = await fetch(fetchURL + `/recipes/${recipeSlug}`, {
+    const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`, {
       method,
       headers,
     });

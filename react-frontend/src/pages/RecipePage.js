@@ -22,10 +22,12 @@ const RecipePage = () => {
 export default RecipePage;
 
 export async function loader({ params }) {
+  const fetchURL =
+    process.env.REACT_APP_NODE_ENV === 'development'
+      ? `http://${process.env.REACT_APP_API_URL}`
+      : `https://${process.env.VERCEL_URL}`;
   const { recipeSlug } = params;
-  const response = await fetch(
-    `http://localhost:3000/api/recipes/${recipeSlug}`
-  );
+  const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`);
 
   if (!response.ok) {
     throw json({ message: 'unable to fetch recipe' });
@@ -40,13 +42,16 @@ export async function action({ request, params }) {
   const recipeSlug = params.recipeSlug;
   const formData = await request.formData();
   const headers = { 'content-type': 'application/json' };
-  const fetchUrl = `${process.env.REACT_APP_API_URL}/recipes/` + recipeSlug;
+  const fetchURL =
+    process.env.REACT_APP_NODE_ENV === 'development'
+      ? `http://${process.env.REACT_APP_API_URL}`
+      : `https://${process.env.VERCEL_URL}`;
 
   if (formData.get('action') === 'deleteIngredient') {
     headers.action = 'deleteingredient';
     const id = formData.get('ingredientId');
 
-    const response = await fetch(fetchUrl, {
+    const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`, {
       method,
       headers,
       body: JSON.stringify({ id }),
@@ -67,7 +72,7 @@ export async function action({ request, params }) {
 
     headers.action = 'addingredient';
 
-    const response = await fetch(fetchUrl, {
+    const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`, {
       method,
       headers,
       body: JSON.stringify(newIngredient),
@@ -89,7 +94,7 @@ export async function action({ request, params }) {
       unit: formData.get('newUnit'),
     };
 
-    const response = await fetch(fetchUrl, {
+    const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`, {
       method,
       headers,
       body: JSON.stringify(updatedIngredient),
