@@ -40,7 +40,6 @@
 		"prettier": "^2.8.7"
 	},
 	"engines": {
-		"node": "18.x",
-		"npm": "16.x"
+		"node": "18.x"
 	}
 }
