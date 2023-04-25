@@ -45,13 +45,14 @@ if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
 
-app.use("/api", homeRouter);
+app.use("/", homeRouter);
+// app.use("/api", homeRouter);
 app.use("/api/recipes", recipeRouter);
 app.use("/api/groceries", groceryRouter);
 // app.use('/api/users', userRouter);
 
-app.all("*", (req, res, next) => {
-	next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+app.all("/api/*", (req, res, next) => {
+	return next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
 app.use(globalErrorController.handleErrors);
