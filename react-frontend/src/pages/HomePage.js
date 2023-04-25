@@ -19,7 +19,8 @@ export async function loader() {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_API_URL}`
-      : `https://${process.env.VERCEL_URL}`;
+      : `http://${process.env.REACT_APP_TEST_URL}`;
+  // `https://${process.env.VERCEL_URL}`;
 
   const response = await fetch(`${fetchURL}/recipes`);
   if (!response) {
@@ -38,7 +39,8 @@ export async function action({ request }) {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_API_URL}`
-      : `https://${process.env.VERCEL_URL}`;
+      : `http://${process.env.REACT_APP_TEST_URL}`;
+  // : `https://${process.env.VERCEL_URL}`;
 
   if (formData.get('action') === 'newRecipe') {
     const newRecipe = {
