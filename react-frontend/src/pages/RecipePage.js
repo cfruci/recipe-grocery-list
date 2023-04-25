@@ -24,8 +24,8 @@ export default RecipePage;
 export async function loader({ params }) {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
-      ? `http://${process.env.REACT_APP_API_URL}`
-      : `https://${process.env.VERCEL_URL}`;
+      ? `http://${process.env.REACT_APP_LOCAL_URL}`
+      : `http://${process.env.REACT_APP_LIVE_URL}`;
   const { recipeSlug } = params;
   const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`);
 
@@ -44,8 +44,8 @@ export async function action({ request, params }) {
   const headers = { 'content-type': 'application/json' };
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
-      ? `http://${process.env.REACT_APP_API_URL}`
-      : `https://${process.env.VERCEL_URL}`;
+      ? `http://${process.env.REACT_APP_LOCAL_URL}`
+      : `http://${process.env.REACT_APP_LIVE_URL}`;
 
   if (formData.get('action') === 'deleteIngredient') {
     headers.action = 'deleteingredient';

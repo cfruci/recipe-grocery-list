@@ -18,9 +18,8 @@ export default HomePage;
 export async function loader() {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
-      ? `http://${process.env.REACT_APP_API_URL}`
-      : `http://${process.env.REACT_APP_TEST_URL}`;
-  // `https://${process.env.VERCEL_URL}`;
+      ? `http://${process.env.REACT_APP_LOCAL_URL}`
+      : `http://${process.env.REACT_APP_LIVE_URL}`;
 
   const response = await fetch(`${fetchURL}/recipes`);
   if (!response) {
@@ -38,9 +37,8 @@ export async function action({ request }) {
   const recipeSlug = formData.get('recipeSlug');
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
-      ? `http://${process.env.REACT_APP_API_URL}`
-      : `http://${process.env.REACT_APP_TEST_URL}`;
-  // : `https://${process.env.VERCEL_URL}`;
+      ? `http://${process.env.REACT_APP_LOCAL_URL}`
+      : `http://${process.env.REACT_APP_LIVE_URL}`;
 
   if (formData.get('action') === 'newRecipe') {
     const newRecipe = {
