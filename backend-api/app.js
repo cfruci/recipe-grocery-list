@@ -21,6 +21,11 @@ const groceryRouter = require("./src/routes/groceryRoutes");
 const app = express();
 dotenv.config({ path: "./config.env" });
 
+app.use(express.static(path.join(__dirname, "../react-frontend/build")));
+// app.use((req, res, next) => {
+// 	res.sendFile(path.join(__dirname, "../react-frontend", "build", "index.html"));
+// });
+
 app.use(hpp()); // protection against parameter pollutions
 app.use(compression()); // compresses response bodies
 app.use(helmet()); // common vulnerability protection
@@ -31,6 +36,7 @@ const limiter = RateLimit({
 	windowMs: 1 * 60 * 1000, // one minute
 	max: 200,
 });
+
 app.use(limiter); // limits API requests
 app.use(express.json()); // for pasring incoming json
 app.use(express.urlencoded({ extended: true })); // for parsing form data
@@ -38,8 +44,6 @@ app.use(express.urlencoded({ extended: true })); // for parsing form data
 if (process.env.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
-
-app.use(express.static(path.join(__dirname, "../react-frontend/build")));
 
 app.use("/api", homeRouter);
 app.use("/api/recipes", recipeRouter);
