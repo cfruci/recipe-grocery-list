@@ -13,7 +13,7 @@ export async function loader() {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_LOCAL_URL}`
-      : `https://${process.env.LIVE_URL}`;
+      : 'https://recipe-grocery-list-api.herokuapp.com/api';
 
   const response = await fetch(`${fetchURL}/groceries`);
   if (!response) {
@@ -33,7 +33,7 @@ export async function action({ request }) {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_LOCAL_URL}`
-      : `https://${process.env.LIVE_URL}`;
+      : 'https://recipe-grocery-list-api.herokuapp.com/api';
 
   let requestData = {};
 
