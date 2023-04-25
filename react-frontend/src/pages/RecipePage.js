@@ -25,7 +25,7 @@ export async function loader({ params }) {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_LOCAL_URL}`
-      : `http://${process.env.REACT_APP_LIVE_URL}`;
+      : `http://${process.env.LIVE_URL}`;
   const { recipeSlug } = params;
   const response = await fetch(`${fetchURL}/recipes/${recipeSlug}`);
 
@@ -45,7 +45,7 @@ export async function action({ request, params }) {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_LOCAL_URL}`
-      : `http://${process.env.REACT_APP_LIVE_URL}`;
+      : `http://${process.env.LIVE_URL}`;
 
   if (formData.get('action') === 'deleteIngredient') {
     headers.action = 'deleteingredient';

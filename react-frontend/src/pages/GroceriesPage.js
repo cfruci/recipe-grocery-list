@@ -13,7 +13,7 @@ export async function loader() {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_LOCAL_URL}`
-      : `http://${process.env.REACT_APP_LIVE_URL}`;
+      : `http://${process.env.LIVE_URL}`;
 
   const response = await fetch(`${fetchURL}/groceries`);
   if (!response) {
@@ -33,7 +33,7 @@ export async function action({ request }) {
   const fetchURL =
     process.env.REACT_APP_NODE_ENV === 'development'
       ? `http://${process.env.REACT_APP_LOCAL_URL}`
-      : `http://${process.env.REACT_APP_LIVE_URL}`;
+      : `http://${process.env.LIVE_URL}`;
 
   let requestData = {};
 
