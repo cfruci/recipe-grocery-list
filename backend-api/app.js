@@ -21,7 +21,7 @@ const groceryRouter = require("./src/routes/groceryRoutes");
 const app = express();
 dotenv.config({ path: "./config.env" });
 
-app.use(express.static(path.join(__dirname, "../react-frontend/build")));
+// app.use(express.static(path.join(__dirname, "../react-frontend/build")));
 // app.use((req, res, next) => {
 // 	res.sendFile(path.join(__dirname, "../react-frontend", "build", "index.html"));
 // });
