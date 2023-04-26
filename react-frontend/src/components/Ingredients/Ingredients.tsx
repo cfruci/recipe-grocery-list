@@ -49,7 +49,7 @@ const Ingredients: React.FC<{ ingredients: IngredientModel[] }> = ({
           <tr>
             <th className={styles.leftColumn}>Ingredient</th>
             <th>Type</th>
-            <th>Quantity</th>
+            <th>Qnty</th>
             <th>Unit</th>
             <th>Actions</th>
           </tr>

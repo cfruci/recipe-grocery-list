@@ -14,9 +14,5 @@
 }
 
 input {
-  max-width: 7rem;
-}
-
-input {
   border-radius: 5px;
 }

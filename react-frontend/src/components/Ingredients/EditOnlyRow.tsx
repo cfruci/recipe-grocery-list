@@ -32,8 +32,8 @@ const EditOnlyRow: React.FC<{
   };
 
   return (
-    <tr key={ingredient._id}>
-      <td className={styles.leftColumn}>
+    <tr key={ingredient._id} className={styles.ingredientTable}>
+      <td className={`${styles.leftColumn} ${styles.editInput}`}>
         <input
           type="text"
           defaultValue={editFormData.ingredientName}
@@ -41,7 +41,12 @@ const EditOnlyRow: React.FC<{
         />
       </td>
       <td>
-        <select name="newType" id="" ref={ingredientTypeRef}>
+        <select
+          name="newType"
+          id=""
+          ref={ingredientTypeRef}
+          className={styles.editInput}
+        >
           <option defaultValue="Type..." disabled>
             Type...
           </option>
@@ -58,6 +63,7 @@ const EditOnlyRow: React.FC<{
           min={0}
           defaultValue={editFormData.quantity}
           ref={ingredientQuantityRef}
+          className={styles.editInput}
         />
       </td>
       <td>

@@ -9,7 +9,7 @@
   border: 1px solid orange;
   margin: auto;
   padding: 1rem;
-  min-width: 30rem;
+  overflow-x: auto;
 }
 
 .ingredientBtns {
