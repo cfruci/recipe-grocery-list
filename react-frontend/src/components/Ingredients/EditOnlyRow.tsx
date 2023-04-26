@@ -32,12 +32,13 @@ const EditOnlyRow: React.FC<{
   };
 
   return (
-    <tr key={ingredient._id} className={styles.ingredientTable}>
-      <td className={`${styles.leftColumn} ${styles.editInput}`}>
+    <tr key={ingredient._id} className={styles.editTableRow}>
+      <td className={styles.leftColumn}>
         <input
           type="text"
           defaultValue={editFormData.ingredientName}
           ref={ingredientNameRef}
+          className={styles.editInput}
         />
       </td>
       <td>
